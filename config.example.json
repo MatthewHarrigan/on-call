@@ -1,0 +1,14 @@
+{
+    "staff": {
+        "Abrar Khan": "445694Y",
+        "Adam.Roberts": "539192Y",
+        "Duncan McDonald": "512089T",
+        "James.Tosh": "524870J",
+        "Julien Mazé": "529163L",
+        "Matthew Harrigan": "506352B",
+        "Marcus.Hobson": "547599L",
+        "jack.o.stevenson": "553398E"
+    },
+    "chargeCode": "S3823",
+    "url": "https://confluence.dev.bbc.co.uk/rest/calendar-services/1.0/calendar/events.json?subCalendarId=ad37c355-3d91-4e31-ac83-de8dbf03cf92&userTimeZoneId=UTC&start=2019-07-27T00%3A00%3A00Z&end=2019-11-08T23%3A00%3A00Z&_=1566220152786"
+}
