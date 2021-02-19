@@ -4,7 +4,7 @@ const { parse } = require('url');
 const { newAgent } = require('./agents');
 
 const agentConfig = {
-  // ca: "/etc/pki/cloud-ca.pem",
+   ca: "/etc/pki/cloud-ca.pem",
   cert: "/etc/pki/tls/certs/client.crt",
   key: "/etc/pki/tls/private/client.key",
 };
