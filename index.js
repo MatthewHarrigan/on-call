@@ -49,10 +49,11 @@ inquirer
     const getStaffNumber = (event) => staff[getName(event)];
     const getDate = (day) => format(day, "DD/MM/YYYY");
 
+    let rowIndex = 1; 
     const rowTemplate = (day, event) =>
-      `,${getStaffNumber(event)},${getName(event)},${chargeCode},${getISOWeek(
+      `${rowIndex++},${getStaffNumber(event)},${getName(event)},${chargeCode},${getISOWeek(
         day
-      )},On-call: ${getDate(day)},,,,,,,,,,,,,${+!isWeekend(day)},${+isWeekend(
+      )},On-call: ${getDate(day)},,,,,,,,,,${+!isWeekend(day)},${+isWeekend(
         day
       )}`;
 
