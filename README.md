@@ -53,3 +53,5 @@ node index.js
 
 ## Copy and paste
 Copy and paste the csv into the Summary Timesheet. You may need to copy and paste into the excel and then use the Data > Text to Columns option.
+
+Alternatively Paste Special (^⌘v) and select "As: Text"
