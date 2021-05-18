@@ -1,8 +1,12 @@
 {
-    "staff": {
-        "Dan Quaver": "123456",
-    },
-    "chargeCode": "S3823",
-    "url": "https://confluence.dev.bbc.co.uk/rest/calendar-services/1.0/calendar/events.json?subCalendarId=ad37c355-3d91-4e31-ac83-de8dbf03cf92&userTimeZoneId=UTC&start=START&end=2020-03-13T00%3A00%3A00Z&_=1576757198500"
+    "team" : "FoodThree",
+    "staff": [
+        {
+            "displayName" : "Dan Quaver",
+            "number" : "1234567Z",
+            "division" : "england-and-wales"
+        }
+    ],
+    "costCentre": "S3823",
+    "url": "https://confluence.dev.bbc.co.uk/rest/calendar-services/1.0/calendar/events.json?subCalendarId=ad37c355-3d91-4e31-ac83-de8dbf03cf92&userTimeZoneId=UTC&start=START&end=END"
 }
-
