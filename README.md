@@ -12,6 +12,9 @@ https://confluence.dev.bbc.co.uk/rest/calendar-services/1.0/calendar/events.json
 
 Note: the date range is hardcoded at the moment and will need to be adjusted or parameterised in the code.
 
+## Bank holidays
+Checks for bank holidays from https://www.gov.uk/bank-holidays.json
+
 ## Certs
 
 Make sure your certs are discoverable by the https client
@@ -36,10 +39,14 @@ The config.json will contain values for your team: staff, charge code and Conflu
 
 ```json
 {
-    "staff": {
-        "<staff user id as displayed in the calendar>": "<staff id>",
-    },
-    "chargeCode": "<your team's charge code>",
+    "staff": [
+        {
+            "displayName" : "<staff user id as displayed in the calendar>",
+            "number" : "<staff id>",
+            "division" : "<country(s) from https://www.gov.uk/bank-holidays.json>"
+        }
+    ],
+    "costCentre": "<your team's charge code>",
     "url": "<jira calendar url>"
 }
 
