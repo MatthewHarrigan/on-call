@@ -35,7 +35,6 @@ inquirer
     },
   ])
   .then((answers) => {
-
     const startDateWithoutMS = answers.start.toISOString().slice(0, -5) + "Z";
     const endDateWithoutMS = answers.end.toISOString().slice(0, -5) + "Z";
 
@@ -56,7 +55,7 @@ inquirer
         "https://www.gov.uk/bank-holidays.json"
       );
 
-      console.log("\n")
+      console.log("\n");
 
       const out = events
         .map((event) => {
@@ -74,10 +73,10 @@ inquirer
             return acc;
           }, 0);
 
-          const dateRangeStr = `On-Call: ${getDate(
-            event.start
-          )} - ${getDate(event.end)}`;
-          
+          const dateRangeStr = `On-Call: ${getDate(event.start)} - ${getDate(
+            event.end
+          )}`;
+
           const name = getName(event)
             .split(".")
             .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
@@ -110,6 +109,10 @@ inquirer
           return allNames;
         }, {});
 
-      console.log(names);
+        const entries = Object.entries(names);
+
+        const sorted = entries.sort((a, b) => b[1] - a[1]);
+
+      console.log(sorted);
     })();
   });
