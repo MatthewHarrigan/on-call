@@ -51,11 +51,6 @@ async function run() {
           "https://www.gov.uk/bank-holidays.json"
         );
 
-        console.log(bankHolidays);
-
-        console.log(events);
-
-
         const out = processCalendarEvents(events, bankHolidays, staff, costCentre);
 
         console.log(out);
