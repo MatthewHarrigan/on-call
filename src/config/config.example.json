@@ -9,8 +9,8 @@
           "division": "england-and-wales"
         }
       ],
-      "costCentre": "S1234",
-      "teamCalendarAPI": "https://confluence/rest/calendar-services/1.0/calendar/events.json?subCalendarId=ad37c355-3d91-4e31-ac83-de8dbf03cf92&userTimeZoneId=UTC&start=START&end=END"
+      "costCentre": "S3823",
+      "url": "https://confluence.dev.bbc.co.uk/rest/calendar-services/1.0/calendar/events.json?subCalendarId=ad37c355-3d91-4e31-ac83-de8dbf03cf92&userTimeZoneId=UTC&start=START&end=END"
     }
   ]
 }
