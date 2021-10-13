@@ -69,6 +69,6 @@ const processCalendarEvents = (events, bankHolidays, staff, costCentre) => {
       bankHols: bankHols,
     };
   });
-}
+};
 
 module.exports = { processCalendarEvents };

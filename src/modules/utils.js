@@ -22,7 +22,7 @@ function printCSV(processedCalendarEvents, costCentre) {
     .join("\n");
 }
 
-function printTimesheetSummaries(processedCalendarEvents) {
+function summariseRotationsByTimesheet(processedCalendarEvents) {
   return processedCalendarEvents.reduce((obj, rotation) => {
     if (!obj[rotation.timesheet]) {
       obj[rotation.timesheet] = { [rotation.name]: 1 };
@@ -38,8 +38,8 @@ function printTimesheetSummaries(processedCalendarEvents) {
   }, {});
 }
 
-function printTotals(events) {
-  const names = events
+function totalRotations(processedCalendarEvents) {
+  const names = processedCalendarEvents
     .flatMap((event) => event.invitees[0].displayName)
     .reduce((allNames, name) => {
       if (name in allNames) {
@@ -56,4 +56,4 @@ function printTotals(events) {
   return sorted;
 }
 
-module.exports = { printCSV, printTimesheetSummaries, printTotals };
+module.exports = { printCSV, summariseRotationsByTimesheet, totalRotations };
