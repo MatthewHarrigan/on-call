@@ -1,6 +1,4 @@
 const createHTTPClient = require("../httpClient");
-const format = require("date-fns/format");
-const parseISO = require("date-fns/parseISO");
 
 const inquirer = require("inquirer");
 inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
@@ -8,9 +6,10 @@ inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
 const { costCentre, url, staff} = require("./config/config.json");
 const { processCalendarEvents } = require("./modules/processCalendarEvents");
 
+const { printCSV, printTimesheetSummaries, printTotals} = require("./modules/printHelpers");
+
 const date = new Date();
 date.setMonth(date.getMonth() - 1);
-const getDate = (day) => format(day, "dd/MM/yyyy");
 
 async function run() {
   inquirer
@@ -51,48 +50,22 @@ async function run() {
           "https://www.gov.uk/bank-holidays.json"
         );
 
-        const out = processCalendarEvents(events, bankHolidays, staff, costCentre);
-
-        console.log(out);
+        const processedCalendarEvents = processCalendarEvents(events, bankHolidays, staff, costCentre);
 
         console.log("\n<copy-paste this into Excel>\n");
 
-        const print = out
-          .map((event) =>
-            [
-              event.staffNumber,
-              event.name,
-              costCentre,
-              `On-Call: ${getDate(parseISO(event.start))} - ${getDate(
-                parseISO(event.end)
-              )}`,
-              "",
-              "",
-              event.weekdays,
-              event.weekends,
-              event.bankHols,
-            ].join(",")
-          )
-          .join("\n");
+        const print = printCSV(processedCalendarEvents, costCentre);
 
         console.log(print, "\n");
 
-        const names = events
-          .flatMap((event) => event.invitees[0].displayName)
-          .reduce((allNames, name) => {
-            if (name in allNames) {
-              allNames[name]++;
-            } else {
-              allNames[name] = 1;
-            }
-            return allNames;
-          }, {});
+        // const sorted = printTotals(events);
 
-        const entries = Object.entries(names);
+        // console.log(sorted, "\n");
 
-        const sorted = entries.sort((a, b) => b[1] - a[1]);
+        const summary = printTimesheetSummaries(processedCalendarEvents);
 
-        console.log(sorted);
+        console.log("Timesheets summary", "\n\n", summary, "\n");
+
       })();
     });
 }
