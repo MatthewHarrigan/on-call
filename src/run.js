@@ -3,10 +3,14 @@ const createHTTPClient = require("../httpClient");
 const inquirer = require("inquirer");
 inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
 
-const { costCentre, url, staff} = require("./config/config.json");
+const { costCentre, url, staff } = require("./config/config.json");
 const { processCalendarEvents } = require("./modules/processCalendarEvents");
 
-const { printCSV, printTimesheetSummaries, printTotals} = require("./modules/printHelpers");
+const {
+  printCSV,
+  summariseRotationsByTimesheet,
+  totalRotations,
+} = require("./modules/utils");
 
 const date = new Date();
 date.setMonth(date.getMonth() - 1);
@@ -50,7 +54,12 @@ async function run() {
           "https://www.gov.uk/bank-holidays.json"
         );
 
-        const processedCalendarEvents = processCalendarEvents(events, bankHolidays, staff, costCentre);
+        const processedCalendarEvents = processCalendarEvents(
+          events,
+          bankHolidays,
+          staff,
+          costCentre
+        );
 
         console.log("\n<copy-paste this into Excel>\n");
 
@@ -58,14 +67,12 @@ async function run() {
 
         console.log(print, "\n");
 
-        // const sorted = printTotals(events);
-
+        // const sorted = totalRotations(events);
         // console.log(sorted, "\n");
 
-        const summary = printTimesheetSummaries(processedCalendarEvents);
+        const summary = summariseRotationsByTimesheet(processedCalendarEvents);
 
         console.log("Timesheets summary", "\n\n", summary, "\n");
-
       })();
     });
 }
