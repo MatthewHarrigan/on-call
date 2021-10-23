@@ -34,9 +34,13 @@ const mockConfig = {
   ],
 };
 
+// Mocking a file
 jest.mock("../../config/config.json", () => mockConfig, { virtual: true });
 
-
+// Mocking a module
+const { processCalendarEvents } = require("../processCalendarEvents");
+jest.mock("../processCalendarEvents");
+processCalendarEvents.mockResolvedValue({ timesheet: "timesheet" });
 
 const { main } = require("../main");
 
@@ -44,31 +48,20 @@ const { response } = require("./mockEventsResponse");
 
 const { bankHolidays } = require("./mockBankHolidaysResponse");
 
-// const processCalendarEvents = require('../processCalendarEvents');
-
-// jest.mock('../processCalendarEvents');
-
-jest.mock('../processCalendarEvents', () => ({
-  UserStore: ({
-      getUser: jest.fn().mockImplementation(arg => ({
-          FirstName: 'Ondrej',
-          LastName: 'Polesny'
-      })),
-      setUser: jest.fn()
-  })
-}));
-
-
-beforeEach(() => {
-  fetch.resetMocks();
-  fetch.mockResponses(
-    [JSON.stringify(bankHolidays), { status: 200 }],
-    [JSON.stringify(response), { status: 200 }]
-  );
-});
-
 describe("main", () => {
-  it("calls fetch", async () => {
+  beforeEach(() => {
+    fetch.resetMocks();
+    fetch.mockResponses(
+      [JSON.stringify(bankHolidays), { status: 200 }],
+      [JSON.stringify(response), { status: 200 }]
+    );
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("calls fetch", async () => {
     await main();
 
     expect(fetch).toHaveBeenCalledTimes(2);
@@ -82,8 +75,7 @@ describe("main", () => {
     );
   });
 
-  it("processes calendar events", async () => {
-
+  test("processes calendar events", async () => {
     await main();
 
     expect(processCalendarEvents).toHaveBeenCalledTimes(1);
