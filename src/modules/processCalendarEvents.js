@@ -8,10 +8,7 @@ const isBefore = require("date-fns/isBefore");
 const parseISO = require("date-fns/parseISO");
 const getName = (event) => event.invitees[0].displayName;
 
-const getStaff = (event, staff) =>
-  staff.find((element) => element.displayName === getName(event));
-
-const processCalendarEvents = (events, bankHolidays, staff, costCentre) => {
+const processCalendarEvents = (events, bankHolidays, staffConfig, costCentre) => {
   return events.map((event) => {
     const start = parseISO(event.start);
     const end = parseISO(event.end);
@@ -21,11 +18,21 @@ const processCalendarEvents = (events, bankHolidays, staff, costCentre) => {
       end: end,
     });
 
+    const findStaff = staffConfig.find((staffFromConfig) => {
+      return staffFromConfig.displayName === event.invitees[0].displayName;
+    });
+
+    if (!findStaff) {
+      throw Error(`Unexpected staff member in calendar - check config: ${event.invitees[0].displayName}`);
+    }
+
+    const staffNumber = findStaff.number;
+
     const weekends = days.filter(isWeekend).length;
     const weekdays = days.length - weekends;
     const bankHols = days.reduce((acc, day) => {
       if (
-        bankHolidays[getStaff(event, staff).division].events.find(
+        bankHolidays[findStaff.division].events.find(
           ({ date }) => date === format(day, "yyyy-MM-dd")
         )
       ) {
@@ -50,8 +57,8 @@ const processCalendarEvents = (events, bankHolidays, staff, costCentre) => {
     const currentMonth = format(payDay, datePattern);
     const previousMonth = format(subMonths(payDay, 1), datePattern);
 
-    // If start date is before payDay put in that month's timesheet
-    // If the period is mostly past payDay I'll discretionally bump to next month
+    // If start date is before payDay put in that month's timesheet here
+    // but if the period is mostly past payDay I'll discretionally bump to next month manually
     const timesheet = isBefore(start, payDay)
       ? `${previousMonth}-${currentMonth}`
       : `${currentMonth}-${nextMonth}`;
@@ -61,7 +68,7 @@ const processCalendarEvents = (events, bankHolidays, staff, costCentre) => {
       start: event.start,
       end: event.end,
       timesheet: timesheet,
-      staffNumber: getStaff(event, staff).number,
+      staffNumber: staffNumber,
       name: name,
       cost: costCentre,
       weekdays: weekdays,
