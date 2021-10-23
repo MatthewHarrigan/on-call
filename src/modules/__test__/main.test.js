@@ -37,8 +37,6 @@ const mockConfig = {
 // Mocking a file
 jest.mock("../../config/config.json", () => mockConfig, { virtual: true });
 
-
-
 const out = [
   {
     timesheet: "Mar-Apr",
@@ -372,12 +370,10 @@ const out = [
   },
 ];
 
-
 // Mocking a module
 const { processCalendarEvents } = require("../processCalendarEvents");
 jest.mock("../processCalendarEvents");
 processCalendarEvents.mockReturnValue(out);
-
 
 const {
   printCSV,
@@ -387,11 +383,16 @@ const {
 
 jest.mock("../utils");
 
+const inquirer = require("inquirer");
+jest.mock("inquirer");
+
+const start = new Date("01 October 2021 14:48 UTC");
+const end = new Date("01 November 2021 14:48 UTC");
+inquirer.prompt.mockResolvedValue({ start: start, end: end });
 
 const { main } = require("../main");
 
 const { response } = require("./mockEventsResponse");
-
 const { bankHolidays } = require("./mockBankHolidaysResponse");
 
 describe("main", () => {
@@ -429,10 +430,10 @@ describe("main", () => {
   test("calls printCSV", async () => {
     await main();
     expect(printCSV).toHaveBeenCalledTimes(1);
-  })
+  });
 
   test("summarises rotations by timesheet", async () => {
     await main();
     expect(summariseRotationsByTimesheet).toHaveBeenCalledTimes(1);
-  })
+  });
 });

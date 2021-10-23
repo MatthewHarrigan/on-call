@@ -13,6 +13,9 @@ const requestOptions = {
   method: "GET",
 };
 
+const inquirer = require("inquirer");
+inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
+
 const {
   printCSV,
   summariseRotationsByTimesheet,
@@ -22,6 +25,9 @@ const {
 const { teams } = require("../config/config.json");
 
 const { processCalendarEvents } = require("./processCalendarEvents");
+
+const date = new Date();
+date.setMonth(date.getMonth() - 1);
 
 async function teamCalendarEvents(team, start, end) {
   const startDateWithoutMS = start.toISOString().slice(0, -5) + "Z";
@@ -40,10 +46,7 @@ async function teamCalendarEvents(team, start, end) {
   return { team, events };
 }
 
-async function main() {
-  const start = new Date("01 October 2021 14:48 UTC");
-  const end = new Date("01 November 2021 14:48 UTC");
-
+async function fetchRender({ start, end }) {
   const response = await fetch("https://www.gov.uk/bank-holidays.json");
   const bankHolidays = await response.json();
 
@@ -69,7 +72,54 @@ async function main() {
 
     // // // const sorted = totalRotations(events);
     // // // console.log(sorted, "\n");
+    const summary = summariseRotationsByTimesheet(processedCalendarEvents);
+    console.log("Timesheets summary", "\n\n", summary, "\n");
+  });
+}
 
+async function main() {
+  const answers = await inquirer.prompt([
+    {
+      type: "datetime",
+      name: "start",
+      message: "Start date",
+      initial: date,
+      format: ["d", "/", "m", "/", "yyyy"],
+    },
+    {
+      type: "datetime",
+      name: "end",
+      message: "End date",
+      initial: new Date(),
+      format: ["d", "/", "m", "/", "yyyy"],
+    },
+  ]);
+
+  const fetchBankhols = await fetch("https://www.gov.uk/bank-holidays.json");
+  const bankHolidays = await fetchBankhols.json();
+
+  const fetchCals = await Promise.all(
+    teams.map((team) => teamCalendarEvents(team, answers.start, answers.end))
+  );
+
+  fetchCals.forEach((result) => {
+    const {
+      team: { costCentre, staff },
+      events,
+    } = result;
+    const processedCalendarEvents = processCalendarEvents(
+      events,
+      bankHolidays,
+      staff,
+      costCentre
+    );
+    console.log("\n<copy-paste this into Excel>\n");
+
+    const print = printCSV(processedCalendarEvents, costCentre);
+    console.log(print, "\n");
+
+    // // // const sorted = totalRotations(events);
+    // // // console.log(sorted, "\n");
     const summary = summariseRotationsByTimesheet(processedCalendarEvents);
     console.log("Timesheets summary", "\n\n", summary, "\n");
   });
