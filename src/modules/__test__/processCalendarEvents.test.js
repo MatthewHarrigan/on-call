@@ -351,4 +351,16 @@ describe("processCalendarEvents", () => {
     );
     expect(processed).toEqual(out);
   });
+  // test("it errors if unexpected user in response", () => {
+  //   const {
+  //     response: { events },
+  //   } = require("./mockEventsResponseWithUnexpectedUser.js");
+
+  //   const processed = processCalendarEvents(
+  //     events,
+  //     bankHolidays,
+  //     staff,
+  //     costCentre
+  //   );
+  // });
 });
