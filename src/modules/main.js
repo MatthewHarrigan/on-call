@@ -46,37 +46,6 @@ async function teamCalendarEvents(team, start, end) {
   return { team, events };
 }
 
-async function fetchRender({ start, end }) {
-  const response = await fetch("https://www.gov.uk/bank-holidays.json");
-  const bankHolidays = await response.json();
-
-  const results = await Promise.all(
-    teams.map((team) => teamCalendarEvents(team, start, end))
-  );
-
-  results.forEach((result) => {
-    const {
-      team: { costCentre, staff },
-      events,
-    } = result;
-    const processedCalendarEvents = processCalendarEvents(
-      events,
-      bankHolidays,
-      staff,
-      costCentre
-    );
-    console.log("\n<copy-paste this into Excel>\n");
-
-    const print = printCSV(processedCalendarEvents, costCentre);
-    console.log(print, "\n");
-
-    // // // const sorted = totalRotations(events);
-    // // // console.log(sorted, "\n");
-    const summary = summariseRotationsByTimesheet(processedCalendarEvents);
-    console.log("Timesheets summary", "\n\n", summary, "\n");
-  });
-}
-
 async function main() {
   const answers = await inquirer.prompt([
     {
