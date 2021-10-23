@@ -64,6 +64,7 @@ async function main() {
       costCentre
     );
 
+
     // console.log("\n<copy-paste this into Excel>\n");
 
     // const print = printCSV(processedCalendarEvents, costCentre);
