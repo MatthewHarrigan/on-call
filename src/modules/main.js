@@ -56,27 +56,22 @@ async function main() {
       team: { costCentre, staff },
       events,
     } = result;
-
     const processedCalendarEvents = processCalendarEvents(
       events,
       bankHolidays,
       staff,
       costCentre
     );
+    console.log("\n<copy-paste this into Excel>\n");
 
+    const print = printCSV(processedCalendarEvents, costCentre);
+    console.log(print, "\n");
 
-    // console.log("\n<copy-paste this into Excel>\n");
+    // // // const sorted = totalRotations(events);
+    // // // console.log(sorted, "\n");
 
-    // const print = printCSV(processedCalendarEvents, costCentre);
-
-    // console.log(print, "\n");
-
-    // // const sorted = totalRotations(events);
-    // // console.log(sorted, "\n");
-
-    // const summary = summariseRotationsByTimesheet(processedCalendarEvents);
-
-    // console.log("Timesheets summary", "\n\n", summary, "\n");
+    const summary = summariseRotationsByTimesheet(processedCalendarEvents);
+    console.log("Timesheets summary", "\n\n", summary, "\n");
   });
 }
 
