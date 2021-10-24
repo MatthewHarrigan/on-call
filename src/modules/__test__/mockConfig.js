@@ -25,9 +25,9 @@ const mockConfig = {
         },
       ],
       calendarPage:
-        "https://confluence.dev.bbc.co.uk/pages/viewpage.action?pageId=123456789",
+        "https://confluence/pages/viewpage.action?pageId=123456789",
       costCentre: "S1234",
-      url: "https://confluence.dev.bbc.co.uk/rest/calendar-services/1.0/calendar/events.json?subCalendarId=950d9966-d3b4-465e-aae2-d2f9cc023e42&userTimeZoneId=UTC&start=START&end=END",
+      url: "https://confluence/rest/calendar-services/1.0/calendar/events.json?subCalendarId=950d9966-d3b4-465e-aae2-d2f9cc023e42&userTimeZoneId=UTC&start=START&end=END",
     },
   ],
 }
