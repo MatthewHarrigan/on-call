@@ -12,7 +12,11 @@ const {
 
 const { bankHolidays } = require("./mockBankHolidaysResponse.js");
 
-const { costCentre, staff } = require("./mockConfig.json");
+const {
+  mockConfig: {
+    teams: [{ staff, costCentre }],
+  },
+} = require("./mockConfig");
 
 describe("totalRotations", () => {
   test("it prints totals", () => {
