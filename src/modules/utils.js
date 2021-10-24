@@ -56,4 +56,18 @@ function totalRotations(processedCalendarEvents) {
   return sorted;
 }
 
-module.exports = { printCSV, summariseRotationsByTimesheet, totalRotations };
+function addDateRangeToCalendarUrl(start, end, url) {
+  const startDateWithoutMS = start.toISOString().slice(0, -5) + "Z";
+  const endDateWithoutMS = end.toISOString().slice(0, -5) + "Z";
+  const urlWithUserStartDate = url.replace(
+    /START/g,
+    encodeURI(startDateWithoutMS)
+  );
+  const urlWithUserEndDate = urlWithUserStartDate.replace(
+    /END/g,
+    encodeURI(endDateWithoutMS)
+  );
+  return urlWithUserEndDate;
+}
+
+module.exports = { printCSV, summariseRotationsByTimesheet, totalRotations, addDateRangeToCalendarUrl };

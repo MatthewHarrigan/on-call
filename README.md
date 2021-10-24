@@ -47,7 +47,7 @@ The config.json will contain values for your team: staff, charge code and Conflu
         }
     ],
     "costCentre": "<your team's charge code>",
-    "url": "<jira calendar url>"
+    "teamCalendarAPI": "<jira calendar url>"
 }
 
 ```

@@ -1,11 +1,11 @@
 require("jest-fetch-mock").enableMocks();
 
-const { mockConfig } = require('./mockConfig');
+const { mockConfig } = require("./mockConfig");
 
 // Mocking a file
 jest.mock("../../config/config.json", () => mockConfig, { virtual: true });
 
-const { mockProcessedEvents } = require('./mockProcessedEvents');
+const { mockProcessedEvents } = require("./mockProcessedEvents");
 
 // Mocking a module
 const { processCalendarEvents } = require("../processCalendarEvents");
@@ -15,7 +15,7 @@ processCalendarEvents.mockReturnValue(mockProcessedEvents);
 const {
   printCSV,
   summariseRotationsByTimesheet,
-  totalRotations,
+  addDateRangeToCalendarUrl,
 } = require("../utils");
 
 jest.mock("../utils");
@@ -46,6 +46,9 @@ describe("main", () => {
   });
 
   test("calls fetch", async () => {
+    addDateRangeToCalendarUrl.mockReturnValue(
+      "https://confluence/rest/calendar-services/1.0/calendar/events.json?subCalendarId=950d9966-d3b4-465e-aae2-d2f9cc023e42&userTimeZoneId=UTC&start=2021-10-01T14:48:00Z&end=2021-11-01T14:48:00Z"
+    );
     await main();
 
     expect(fetch).toHaveBeenCalledTimes(2);

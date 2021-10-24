@@ -19,11 +19,13 @@ const {
   printCSV,
   summariseRotationsByTimesheet,
   totalRotations,
+  addDateRangeToCalendarUrl
 } = require("./utils");
 
 const { processCalendarEvents } = require("./processCalendarEvents");
 
 const inquirer = require("inquirer");
+
 inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
 
 const date = new Date();
@@ -47,17 +49,9 @@ const questions = [
 ]
 
 async function fetchCalendarEventsByDateRange(team, start, end) {
-  const startDateWithoutMS = start.toISOString().slice(0, -5) + "Z";
-  const endDateWithoutMS = end.toISOString().slice(0, -5) + "Z";
-  const urlWithUserStartDate = team.url.replace(
-    /START/g,
-    encodeURI(startDateWithoutMS)
-  );
-  const urlWithUserEndDate = urlWithUserStartDate.replace(
-    /END/g,
-    encodeURI(endDateWithoutMS)
-  );
+  const { teamCalendarAPI } = team;
 
+  const urlWithUserEndDate = addDateRangeToCalendarUrl(start, end, teamCalendarAPI);
   const response = await fetch(urlWithUserEndDate, requestOptions);
   const { events } = await response.json();
   return { team, events };
