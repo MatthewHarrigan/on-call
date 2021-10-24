@@ -33,6 +33,12 @@ describe("totalRotations", () => {
   });
 });
 
+describe('addDateRangeToCalendarUrl', () => {
+  test("inserts dates into team calendar URL", () => {
+
+  });
+})
+
 describe("summariseRotationsByTimesheet", () => {
   test("it prints Timesheet summary", () => {
     const processedCalendarEvents = processCalendarEvents(
