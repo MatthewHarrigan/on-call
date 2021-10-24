@@ -13,8 +13,7 @@ const requestOptions = {
   method: "GET",
 };
 
-const inquirer = require("inquirer");
-inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
+const { teams } = require("../config/config.json");
 
 const {
   printCSV,
@@ -22,14 +21,32 @@ const {
   totalRotations,
 } = require("./utils");
 
-const { teams } = require("../config/config.json");
-
 const { processCalendarEvents } = require("./processCalendarEvents");
+
+const inquirer = require("inquirer");
+inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
 
 const date = new Date();
 date.setMonth(date.getMonth() - 1);
 
-async function teamCalendarEvents(team, start, end) {
+const questions = [
+  {
+    type: "datetime",
+    name: "start",
+    message: "Start date",
+    initial: date,
+    format: ["d", "/", "m", "/", "yyyy"],
+  },
+  {
+    type: "datetime",
+    name: "end",
+    message: "End date",
+    initial: new Date(),
+    format: ["d", "/", "m", "/", "yyyy"],
+  },
+]
+
+async function fetchCalendarEventsByDateRange(team, start, end) {
   const startDateWithoutMS = start.toISOString().slice(0, -5) + "Z";
   const endDateWithoutMS = end.toISOString().slice(0, -5) + "Z";
   const urlWithUserStartDate = team.url.replace(
@@ -47,31 +64,16 @@ async function teamCalendarEvents(team, start, end) {
 }
 
 async function main() {
-  const answers = await inquirer.prompt([
-    {
-      type: "datetime",
-      name: "start",
-      message: "Start date",
-      initial: date,
-      format: ["d", "/", "m", "/", "yyyy"],
-    },
-    {
-      type: "datetime",
-      name: "end",
-      message: "End date",
-      initial: new Date(),
-      format: ["d", "/", "m", "/", "yyyy"],
-    },
-  ]);
+  const answers = await inquirer.prompt(questions);
 
   const fetchBankhols = await fetch("https://www.gov.uk/bank-holidays.json");
   const bankHolidays = await fetchBankhols.json();
 
-  const fetchCals = await Promise.all(
-    teams.map((team) => teamCalendarEvents(team, answers.start, answers.end))
+  const calendarEventResults = await Promise.all(
+    teams.map((team) => fetchCalendarEventsByDateRange(team, answers.start, answers.end))
   );
 
-  fetchCals.forEach((result) => {
+  calendarEventResults.forEach((result) => {
     const {
       team: { costCentre, staff },
       events,
