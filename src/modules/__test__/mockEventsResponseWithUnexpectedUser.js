@@ -8,7 +8,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c5636c7152bd016e282712f6023b",
+          "https://confluence/display/~2c97c5636c7152bd016e282712f6023b",
         localizedStartDate: "17-Mar-2021",
         confluenceFormattedStartDate: "17 Mar, 2021",
         invitees: [
@@ -18,20 +18,20 @@ const response = {
             id: "2c97c5636c7152bd016e282712f6023b",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+              "https://confluence/download/attachments/198225966/user-avatar",
             email: "todd.bonzalez@bbc.co.uk",
           },
         ],
         end: "2021-03-23T00:00:00.000Z",
-        id: "20210219T192025Z--1325014045@confluence.dev.bbc.co.uk",
+        id: "20210219T192025Z--1325014045@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+          "https://confluence/download/attachments/198225966/user-avatar",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "23-Mar-2021",
         originalStartDateTime: "2021-03-17T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+          "https://confluence/download/attachments/198225966/user-avatar",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -56,7 +56,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a7ddf2581",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a7ddf2581",
         localizedStartDate: "24-Mar-2021",
         confluenceFormattedStartDate: "24 Mar, 2021",
         invitees: [
@@ -66,20 +66,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a7ddf2581",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "bobson.dugnutt@bbc.co.uk",
           },
         ],
         end: "2021-03-30T00:00:00.000Z",
-        id: "20210301T144702Z--1325014045@confluence.dev.bbc.co.uk",
+        id: "20210301T144702Z--1325014045@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "30-Mar-2021",
         originalStartDateTime: "2021-03-24T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -104,7 +104,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a814a2cfe",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
         localizedStartDate: "31-Mar-2021",
         confluenceFormattedStartDate: "31 Mar, 2021",
         invitees: [
@@ -114,20 +114,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a814a2cfe",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+              "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
             email: "willie.dustice@bbc.co.uk",
           },
         ],
         end: "2021-04-06T00:00:00.000Z",
-        id: "20210326T090551Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210326T090551Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "06-Apr-2021",
         originalStartDateTime: "2021-03-31T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -152,7 +152,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c56361507d600163ac18c7ff041f",
+          "https://confluence/display/~2c97c56361507d600163ac18c7ff041f",
         localizedStartDate: "07-Apr-2021",
         confluenceFormattedStartDate: "07 Apr, 2021",
         invitees: [
@@ -162,20 +162,20 @@ const response = {
             id: "2c97c56361507d600163ac18c7ff041f",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "dorse.o.hintline@bbc.co.uk",
           },
         ],
         end: "2021-04-13T00:00:00.000Z",
-        id: "20210326T090611Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210326T090611Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "13-Apr-2021",
         originalStartDateTime: "2021-04-07T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -200,7 +200,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c5636c7152bd016e282712f6023b",
+          "https://confluence/display/~2c97c5636c7152bd016e282712f6023b",
         localizedStartDate: "14-Apr-2021",
         confluenceFormattedStartDate: "14 Apr, 2021",
         invitees: [
@@ -210,20 +210,20 @@ const response = {
             id: "2c97c5636c7152bd016e282712f6023b",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+              "https://confluence/download/attachments/198225966/user-avatar",
             email: "todd.bonzalez@bbc.co.uk",
           },
         ],
         end: "2021-04-20T00:00:00.000Z",
-        id: "20210326T090637Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210326T090637Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+          "https://confluence/download/attachments/198225966/user-avatar",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "20-Apr-2021",
         originalStartDateTime: "2021-04-14T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+          "https://confluence/download/attachments/198225966/user-avatar",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -248,7 +248,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a7ddf2581",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a7ddf2581",
         localizedStartDate: "21-Apr-2021",
         confluenceFormattedStartDate: "21 Apr, 2021",
         invitees: [
@@ -258,20 +258,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a7ddf2581",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "bobson.dugnutt@bbc.co.uk",
           },
         ],
         end: "2021-04-27T00:00:00.000Z",
-        id: "20210326T090652Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210326T090652Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "27-Apr-2021",
         originalStartDateTime: "2021-04-21T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -296,7 +296,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a814a2cfe",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
         localizedStartDate: "28-Apr-2021",
         confluenceFormattedStartDate: "28 Apr, 2021",
         invitees: [
@@ -306,20 +306,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a814a2cfe",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+              "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
             email: "willie.dustice@bbc.co.uk",
           },
         ],
         end: "2021-05-04T00:00:00.000Z",
-        id: "20210414T090454Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210414T090454Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "04-May-2021",
         originalStartDateTime: "2021-04-28T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -344,7 +344,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c56361507d600163ac18c7ff041f",
+          "https://confluence/display/~2c97c56361507d600163ac18c7ff041f",
         localizedStartDate: "05-May-2021",
         confluenceFormattedStartDate: "05 May, 2021",
         invitees: [
@@ -354,20 +354,20 @@ const response = {
             id: "2c97c56361507d600163ac18c7ff041f",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "dorse.o.hintline@bbc.co.uk",
           },
         ],
         end: "2021-05-11T00:00:00.000Z",
-        id: "20210414T090535Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210414T090535Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "11-May-2021",
         originalStartDateTime: "2021-05-05T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -392,7 +392,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c5636c7152bd016e282712f6023b",
+          "https://confluence/display/~2c97c5636c7152bd016e282712f6023b",
         localizedStartDate: "12-May-2021",
         confluenceFormattedStartDate: "12 May, 2021",
         invitees: [
@@ -402,20 +402,20 @@ const response = {
             id: "2c97c5636c7152bd016e282712f6023b",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+              "https://confluence/download/attachments/198225966/user-avatar",
             email: "todd.bonzalez@bbc.co.uk",
           },
         ],
         end: "2021-05-12T00:00:00.000Z",
-        id: "20210414T090600Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210414T090600Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+          "https://confluence/download/attachments/198225966/user-avatar",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "12-May-2021",
         originalStartDateTime: "2021-05-12T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+          "https://confluence/download/attachments/198225966/user-avatar",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -440,7 +440,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a814a2cfe",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
         localizedStartDate: "13-May-2021",
         confluenceFormattedStartDate: "13 May, 2021",
         invitees: [
@@ -450,20 +450,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a814a2cfe",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+              "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
             email: "willie.dustice@bbc.co.uk",
           },
         ],
         end: "2021-05-18T00:00:00.000Z",
-        id: "20210513T103442Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210513T103442Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "18-May-2021",
         originalStartDateTime: "2021-05-13T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -488,7 +488,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a7ddf2581",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a7ddf2581",
         localizedStartDate: "19-May-2021",
         confluenceFormattedStartDate: "19 May, 2021",
         invitees: [
@@ -498,20 +498,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a7ddf2581",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "bobson.dugnutt@bbc.co.uk",
           },
         ],
         end: "2021-05-25T00:00:00.000Z",
-        id: "20210414T090623Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210414T090623Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "25-May-2021",
         originalStartDateTime: "2021-05-19T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -536,7 +536,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a814a2cfe",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
         localizedStartDate: "26-May-2021",
         confluenceFormattedStartDate: "26 May, 2021",
         invitees: [
@@ -546,20 +546,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a814a2cfe",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+              "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
             email: "willie.dustice@bbc.co.uk",
           },
         ],
         end: "2021-06-01T00:00:00.000Z",
-        id: "20210505T093347Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210505T093347Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "01-Jun-2021",
         originalStartDateTime: "2021-05-26T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -584,7 +584,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c56361507d600163ac18c7ff041f",
+          "https://confluence/display/~2c97c56361507d600163ac18c7ff041f",
         localizedStartDate: "02-Jun-2021",
         confluenceFormattedStartDate: "02 Jun, 2021",
         invitees: [
@@ -594,20 +594,20 @@ const response = {
             id: "2c97c56361507d600163ac18c7ff041f",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "dorse.o.hintline@bbc.co.uk",
           },
         ],
         end: "2021-06-08T00:00:00.000Z",
-        id: "20210505T093406Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210505T093406Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "08-Jun-2021",
         originalStartDateTime: "2021-06-02T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -632,7 +632,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c5636c7152bd016e282712f6023b",
+          "https://confluence/display/~2c97c5636c7152bd016e282712f6023b",
         localizedStartDate: "09-Jun-2021",
         confluenceFormattedStartDate: "09 Jun, 2021",
         invitees: [
@@ -642,20 +642,20 @@ const response = {
             id: "2c97c5636c7152bd016e282712f6023b",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+              "https://confluence/download/attachments/198225966/user-avatar",
             email: "todd.bonzalez@bbc.co.uk",
           },
         ],
         end: "2021-06-15T00:00:00.000Z",
-        id: "20210505T093455Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210505T093455Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+          "https://confluence/download/attachments/198225966/user-avatar",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "15-Jun-2021",
         originalStartDateTime: "2021-06-09T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+          "https://confluence/download/attachments/198225966/user-avatar",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -680,7 +680,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a7ddf2581",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a7ddf2581",
         localizedStartDate: "16-Jun-2021",
         confluenceFormattedStartDate: "16 Jun, 2021",
         invitees: [
@@ -690,20 +690,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a7ddf2581",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "bobson.dugnutt@bbc.co.uk",
           },
         ],
         end: "2021-06-22T00:00:00.000Z",
-        id: "20210505T093510Z--240064805@confluence.dev.bbc.co.uk",
+        id: "20210505T093510Z--240064805@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "22-Jun-2021",
         originalStartDateTime: "2021-06-16T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -728,7 +728,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a814a2cfe",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
         localizedStartDate: "23-Jun-2021",
         confluenceFormattedStartDate: "23 Jun, 2021",
         invitees: [
@@ -738,20 +738,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a814a2cfe",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+              "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
             email: "willie.dustice@bbc.co.uk",
           },
         ],
         end: "2021-06-29T00:00:00.000Z",
-        id: "20210602T165343Z-1320489686@confluence.dev.bbc.co.uk",
+        id: "20210602T165343Z-1320489686@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "29-Jun-2021",
         originalStartDateTime: "2021-06-23T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -776,7 +776,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c56361507d600163ac18c7ff041f",
+          "https://confluence/display/~2c97c56361507d600163ac18c7ff041f",
         localizedStartDate: "30-Jun-2021",
         confluenceFormattedStartDate: "30 Jun, 2021",
         invitees: [
@@ -786,20 +786,20 @@ const response = {
             id: "2c97c56361507d600163ac18c7ff041f",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "dorse.o.hintline@bbc.co.uk",
           },
         ],
         end: "2021-07-06T00:00:00.000Z",
-        id: "20210602T165412Z-1320489686@confluence.dev.bbc.co.uk",
+        id: "20210602T165412Z-1320489686@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "06-Jul-2021",
         originalStartDateTime: "2021-06-30T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -824,7 +824,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c5636c7152bd016e282712f6023b",
+          "https://confluence/display/~2c97c5636c7152bd016e282712f6023b",
         localizedStartDate: "07-Jul-2021",
         confluenceFormattedStartDate: "07 Jul, 2021",
         invitees: [
@@ -834,20 +834,20 @@ const response = {
             id: "2c97c5636c7152bd016e282712f6023b",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+              "https://confluence/download/attachments/198225966/user-avatar",
             email: "todd.bonzalez@bbc.co.uk",
           },
         ],
         end: "2021-07-13T00:00:00.000Z",
-        id: "20210602T165426Z-1320489686@confluence.dev.bbc.co.uk",
+        id: "20210602T165426Z-1320489686@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+          "https://confluence/download/attachments/198225966/user-avatar",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "13-Jul-2021",
         originalStartDateTime: "2021-07-07T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/198225966/user-avatar",
+          "https://confluence/download/attachments/198225966/user-avatar",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -872,7 +872,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a7ddf2581",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a7ddf2581",
         localizedStartDate: "14-Jul-2021",
         confluenceFormattedStartDate: "14 Jul, 2021",
         invitees: [
@@ -882,20 +882,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a7ddf2581",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "bobson.dugnutt@bbc.co.uk",
           },
         ],
         end: "2021-07-20T00:00:00.000Z",
-        id: "20210602T165448Z-1320489686@confluence.dev.bbc.co.uk",
+        id: "20210602T165448Z-1320489686@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "20-Jul-2021",
         originalStartDateTime: "2021-07-14T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -920,7 +920,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a814a2cfe",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
         localizedStartDate: "21-Jul-2021",
         confluenceFormattedStartDate: "21 Jul, 2021",
         invitees: [
@@ -930,20 +930,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a814a2cfe",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+              "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
             email: "willie.dustice@bbc.co.uk",
           },
         ],
         end: "2021-07-27T00:00:00.000Z",
-        id: "20210630T154325Z-1320489686@confluence.dev.bbc.co.uk",
+        id: "20210630T154325Z-1320489686@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "27-Jul-2021",
         originalStartDateTime: "2021-07-21T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -968,7 +968,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c56361507d600163ac18c7ff041f",
+          "https://confluence/display/~2c97c56361507d600163ac18c7ff041f",
         localizedStartDate: "28-Jul-2021",
         confluenceFormattedStartDate: "28 Jul, 2021",
         invitees: [
@@ -978,20 +978,20 @@ const response = {
             id: "2c97c56361507d600163ac18c7ff041f",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "dorse.o.hintline@bbc.co.uk",
           },
         ],
         end: "2021-08-03T00:00:00.000Z",
-        id: "20210721T094931Z-1413512350@confluence.dev.bbc.co.uk",
+        id: "20210721T094931Z-1413512350@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "03-Aug-2021",
         originalStartDateTime: "2021-07-28T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -1016,7 +1016,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a7ddf2581",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a7ddf2581",
         localizedStartDate: "04-Aug-2021",
         confluenceFormattedStartDate: "04 Aug, 2021",
         invitees: [
@@ -1026,20 +1026,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a7ddf2581",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "bobson.dugnutt@bbc.co.uk",
           },
         ],
         end: "2021-08-10T00:00:00.000Z",
-        id: "20210721T094953Z-1413512350@confluence.dev.bbc.co.uk",
+        id: "20210721T094953Z-1413512350@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "10-Aug-2021",
         originalStartDateTime: "2021-08-04T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -1064,7 +1064,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a814a2cfe",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
         localizedStartDate: "11-Aug-2021",
         confluenceFormattedStartDate: "11 Aug, 2021",
         invitees: [
@@ -1074,20 +1074,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a814a2cfe",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+              "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
             email: "willie.dustice@bbc.co.uk",
           },
         ],
         end: "2021-08-17T00:00:00.000Z",
-        id: "20210721T095020Z-1413512350@confluence.dev.bbc.co.uk",
+        id: "20210721T095020Z-1413512350@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "17-Aug-2021",
         originalStartDateTime: "2021-08-11T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -1112,7 +1112,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c56361507d600163ac18c7ff041f",
+          "https://confluence/display/~2c97c56361507d600163ac18c7ff041f",
         localizedStartDate: "18-Aug-2021",
         confluenceFormattedStartDate: "18 Aug, 2021",
         invitees: [
@@ -1122,20 +1122,20 @@ const response = {
             id: "2c97c56361507d600163ac18c7ff041f",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "dorse.o.hintline@bbc.co.uk",
           },
         ],
         end: "2021-08-24T00:00:00.000Z",
-        id: "20210811T111509Z-1413512350@confluence.dev.bbc.co.uk",
+        id: "20210811T111509Z-1413512350@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "24-Aug-2021",
         originalStartDateTime: "2021-08-18T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -1160,7 +1160,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a7ddf2581",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a7ddf2581",
         localizedStartDate: "25-Aug-2021",
         confluenceFormattedStartDate: "25 Aug, 2021",
         invitees: [
@@ -1170,20 +1170,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a7ddf2581",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "bobson.dugnutt@bbc.co.uk",
           },
         ],
         end: "2021-08-31T00:00:00.000Z",
-        id: "20210721T095042Z-1413512350@confluence.dev.bbc.co.uk",
+        id: "20210721T095042Z-1413512350@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "31-Aug-2021",
         originalStartDateTime: "2021-08-25T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -1208,7 +1208,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c56361507d600163ac18c7ff041f",
+          "https://confluence/display/~2c97c56361507d600163ac18c7ff041f",
         localizedStartDate: "01-Sep-2021",
         confluenceFormattedStartDate: "01 Sep, 2021",
         invitees: [
@@ -1218,20 +1218,20 @@ const response = {
             id: "2c97c56361507d600163ac18c7ff041f",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "dorse.o.hintline@bbc.co.uk",
           },
         ],
         end: "2021-09-07T00:00:00.000Z",
-        id: "20210811T111626Z-1413512350@confluence.dev.bbc.co.uk",
+        id: "20210811T111626Z-1413512350@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "07-Sep-2021",
         originalStartDateTime: "2021-09-01T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -1256,7 +1256,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a7ddf2581",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a7ddf2581",
         localizedStartDate: "08-Sep-2021",
         confluenceFormattedStartDate: "08 Sep, 2021",
         invitees: [
@@ -1266,20 +1266,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a7ddf2581",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "bobson.dugnutt@bbc.co.uk",
           },
         ],
         end: "2021-09-14T00:00:00.000Z",
-        id: "20210811T111650Z-1413512350@confluence.dev.bbc.co.uk",
+        id: "20210811T111650Z-1413512350@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "14-Sep-2021",
         originalStartDateTime: "2021-09-08T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -1304,7 +1304,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a814a2cfe",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
         localizedStartDate: "15-Sep-2021",
         confluenceFormattedStartDate: "15 Sep, 2021",
         invitees: [
@@ -1314,20 +1314,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a814a2cfe",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+              "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
             email: "willie.dustice@bbc.co.uk",
           },
         ],
         end: "2021-09-21T00:00:00.000Z",
-        id: "20210811T111558Z-1413512350@confluence.dev.bbc.co.uk",
+        id: "20210811T111558Z-1413512350@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "21-Sep-2021",
         originalStartDateTime: "2021-09-15T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -1352,7 +1352,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97891b4ad4899c014ad49a814a2cfe",
+          "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
         localizedStartDate: "22-Sep-2021",
         confluenceFormattedStartDate: "22 Sep, 2021",
         invitees: [
@@ -1362,20 +1362,20 @@ const response = {
             id: "2c97891b4ad4899c014ad49a814a2cfe",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+              "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
             email: "willie.dustice@bbc.co.uk",
           },
         ],
         end: "2021-09-28T00:00:00.000Z",
-        id: "20210811T111709Z-1413512350@confluence.dev.bbc.co.uk",
+        id: "20210811T111709Z-1413512350@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "28-Sep-2021",
         originalStartDateTime: "2021-09-22T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
+          "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
@@ -1400,7 +1400,7 @@ const response = {
         title: "On-call",
         allDay: true,
         iconLink:
-          "https://confluence.dev.bbc.co.uk/display/~2c97c56361507d600163ac18c7ff041f",
+          "https://confluence/display/~2c97c56361507d600163ac18c7ff041f",
         localizedStartDate: "29-Sep-2021",
         confluenceFormattedStartDate: "29 Sep, 2021",
         invitees: [
@@ -1410,20 +1410,20 @@ const response = {
             id: "2c97c56361507d600163ac18c7ff041f",
             type: "confluence",
             avatarIconUrl:
-              "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+              "https://confluence/images/icons/profilepics/default.svg",
             email: "dorse.o.hintline@bbc.co.uk",
           },
         ],
         end: "2021-10-05T00:00:00.000Z",
-        id: "20210811T111743Z-1413512350@confluence.dev.bbc.co.uk",
+        id: "20210811T111743Z-1413512350@confluence",
         iconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
         localizedEndDate: "05-Oct-2021",
         originalStartDateTime: "2021-09-29T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
-          "https://confluence.dev.bbc.co.uk/images/icons/profilepics/default.svg",
+          "https://confluence/images/icons/profilepics/default.svg",
         expandDates: true,
         originalEndTime: "0:00",
         editable: true,
