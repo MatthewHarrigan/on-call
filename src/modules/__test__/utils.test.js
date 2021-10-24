@@ -101,36 +101,36 @@ describe("printCSV", () => {
 
     const csv = printCSV(processedCalendarEvents, costCentre);
 
-    const expectedCSV = `524870J,Todd Bonzalez,S3823,On-Call: 17/03/2021 - 23/03/2021,,,5,2,0
-527770W,Bobson Dugnutt,S3823,On-Call: 24/03/2021 - 30/03/2021,,,5,2,0
-506352B,Willie Dustice,S3823,On-Call: 31/03/2021 - 06/04/2021,,,5,2,2
-553398E,Dorse O Hintline,S3823,On-Call: 07/04/2021 - 13/04/2021,,,5,2,0
-524870J,Todd Bonzalez,S3823,On-Call: 14/04/2021 - 20/04/2021,,,5,2,0
-527770W,Bobson Dugnutt,S3823,On-Call: 21/04/2021 - 27/04/2021,,,5,2,0
-506352B,Willie Dustice,S3823,On-Call: 28/04/2021 - 04/05/2021,,,5,2,1
-553398E,Dorse O Hintline,S3823,On-Call: 05/05/2021 - 11/05/2021,,,5,2,0
-524870J,Todd Bonzalez,S3823,On-Call: 12/05/2021 - 12/05/2021,,,1,0,0
-506352B,Willie Dustice,S3823,On-Call: 13/05/2021 - 18/05/2021,,,4,2,0
-527770W,Bobson Dugnutt,S3823,On-Call: 19/05/2021 - 25/05/2021,,,5,2,0
-506352B,Willie Dustice,S3823,On-Call: 26/05/2021 - 01/06/2021,,,5,2,1
-553398E,Dorse O Hintline,S3823,On-Call: 02/06/2021 - 08/06/2021,,,5,2,0
-524870J,Todd Bonzalez,S3823,On-Call: 09/06/2021 - 15/06/2021,,,5,2,0
-527770W,Bobson Dugnutt,S3823,On-Call: 16/06/2021 - 22/06/2021,,,5,2,0
-506352B,Willie Dustice,S3823,On-Call: 23/06/2021 - 29/06/2021,,,5,2,0
-553398E,Dorse O Hintline,S3823,On-Call: 30/06/2021 - 06/07/2021,,,5,2,0
-524870J,Todd Bonzalez,S3823,On-Call: 07/07/2021 - 13/07/2021,,,5,2,0
-527770W,Bobson Dugnutt,S3823,On-Call: 14/07/2021 - 20/07/2021,,,5,2,0
-506352B,Willie Dustice,S3823,On-Call: 21/07/2021 - 27/07/2021,,,5,2,0
-553398E,Dorse O Hintline,S3823,On-Call: 28/07/2021 - 03/08/2021,,,5,2,0
-527770W,Bobson Dugnutt,S3823,On-Call: 04/08/2021 - 10/08/2021,,,5,2,0
-506352B,Willie Dustice,S3823,On-Call: 11/08/2021 - 17/08/2021,,,5,2,0
-553398E,Dorse O Hintline,S3823,On-Call: 18/08/2021 - 24/08/2021,,,5,2,0
-527770W,Bobson Dugnutt,S3823,On-Call: 25/08/2021 - 31/08/2021,,,5,2,1
-553398E,Dorse O Hintline,S3823,On-Call: 01/09/2021 - 07/09/2021,,,5,2,0
-527770W,Bobson Dugnutt,S3823,On-Call: 08/09/2021 - 14/09/2021,,,5,2,0
-506352B,Willie Dustice,S3823,On-Call: 15/09/2021 - 21/09/2021,,,5,2,0
-506352B,Willie Dustice,S3823,On-Call: 22/09/2021 - 28/09/2021,,,5,2,0
-553398E,Dorse O Hintline,S3823,On-Call: 29/09/2021 - 05/10/2021,,,5,2,0`;
+    const expectedCSV = `555555A,Todd Bonzalez,S1234,On-Call: 17/03/2021 - 23/03/2021,,,5,2,0
+555555B,Bobson Dugnutt,S1234,On-Call: 24/03/2021 - 30/03/2021,,,5,2,0
+555555C,Willie Dustice,S1234,On-Call: 31/03/2021 - 06/04/2021,,,5,2,2
+555555D,Dorse O Hintline,S1234,On-Call: 07/04/2021 - 13/04/2021,,,5,2,0
+555555A,Todd Bonzalez,S1234,On-Call: 14/04/2021 - 20/04/2021,,,5,2,0
+555555B,Bobson Dugnutt,S1234,On-Call: 21/04/2021 - 27/04/2021,,,5,2,0
+555555C,Willie Dustice,S1234,On-Call: 28/04/2021 - 04/05/2021,,,5,2,1
+555555D,Dorse O Hintline,S1234,On-Call: 05/05/2021 - 11/05/2021,,,5,2,0
+555555A,Todd Bonzalez,S1234,On-Call: 12/05/2021 - 12/05/2021,,,1,0,0
+555555C,Willie Dustice,S1234,On-Call: 13/05/2021 - 18/05/2021,,,4,2,0
+555555B,Bobson Dugnutt,S1234,On-Call: 19/05/2021 - 25/05/2021,,,5,2,0
+555555C,Willie Dustice,S1234,On-Call: 26/05/2021 - 01/06/2021,,,5,2,1
+555555D,Dorse O Hintline,S1234,On-Call: 02/06/2021 - 08/06/2021,,,5,2,0
+555555A,Todd Bonzalez,S1234,On-Call: 09/06/2021 - 15/06/2021,,,5,2,0
+555555B,Bobson Dugnutt,S1234,On-Call: 16/06/2021 - 22/06/2021,,,5,2,0
+555555C,Willie Dustice,S1234,On-Call: 23/06/2021 - 29/06/2021,,,5,2,0
+555555D,Dorse O Hintline,S1234,On-Call: 30/06/2021 - 06/07/2021,,,5,2,0
+555555A,Todd Bonzalez,S1234,On-Call: 07/07/2021 - 13/07/2021,,,5,2,0
+555555B,Bobson Dugnutt,S1234,On-Call: 14/07/2021 - 20/07/2021,,,5,2,0
+555555C,Willie Dustice,S1234,On-Call: 21/07/2021 - 27/07/2021,,,5,2,0
+555555D,Dorse O Hintline,S1234,On-Call: 28/07/2021 - 03/08/2021,,,5,2,0
+555555B,Bobson Dugnutt,S1234,On-Call: 04/08/2021 - 10/08/2021,,,5,2,0
+555555C,Willie Dustice,S1234,On-Call: 11/08/2021 - 17/08/2021,,,5,2,0
+555555D,Dorse O Hintline,S1234,On-Call: 18/08/2021 - 24/08/2021,,,5,2,0
+555555B,Bobson Dugnutt,S1234,On-Call: 25/08/2021 - 31/08/2021,,,5,2,1
+555555D,Dorse O Hintline,S1234,On-Call: 01/09/2021 - 07/09/2021,,,5,2,0
+555555B,Bobson Dugnutt,S1234,On-Call: 08/09/2021 - 14/09/2021,,,5,2,0
+555555C,Willie Dustice,S1234,On-Call: 15/09/2021 - 21/09/2021,,,5,2,0
+555555C,Willie Dustice,S1234,On-Call: 22/09/2021 - 28/09/2021,,,5,2,0
+555555D,Dorse O Hintline,S1234,On-Call: 29/09/2021 - 05/10/2021,,,5,2,0`;
 
     expect(csv).toEqual(expectedCSV);
   });
