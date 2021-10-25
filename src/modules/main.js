@@ -19,7 +19,7 @@ const {
   printCSV,
   summariseRotationsByTimesheet,
   totalRotations,
-  addDateRangeToCalendarUrl
+  addDateRangeToCalendarUrl,
 } = require("./utils");
 
 const { processCalendarEvents } = require("./processCalendarEvents");
@@ -34,37 +34,43 @@ date.setMonth(date.getMonth() - 1);
 const questions = [
   {
     type: "datetime",
-    name: "start",
+    name: "userStart",
     message: "Start date",
     initial: date,
     format: ["d", "/", "m", "/", "yyyy"],
   },
   {
     type: "datetime",
-    name: "end",
+    name: "userEnd",
     message: "End date",
     initial: new Date(),
     format: ["d", "/", "m", "/", "yyyy"],
   },
-]
+];
 
 async function fetchCalendarEventsByDateRange(team, start, end) {
   const { teamCalendarAPI } = team;
 
-  const urlWithUserEndDate = addDateRangeToCalendarUrl(start, end, teamCalendarAPI);
+  const urlWithUserEndDate = addDateRangeToCalendarUrl(
+    start,
+    end,
+    teamCalendarAPI
+  );
   const response = await fetch(urlWithUserEndDate, requestOptions);
   const { events } = await response.json();
   return { team, events };
 }
 
 async function main() {
-  const answers = await inquirer.prompt(questions);
+  const { userStart, userEnd } = await inquirer.prompt(questions);
 
   const fetchBankhols = await fetch("https://www.gov.uk/bank-holidays.json");
   const bankHolidays = await fetchBankhols.json();
 
   const calendarEventResults = await Promise.all(
-    teams.map((team) => fetchCalendarEventsByDateRange(team, answers.start, answers.end))
+    teams.map((team) =>
+      fetchCalendarEventsByDateRange(team, userStart, userEnd)
+    )
   );
 
   calendarEventResults.forEach((result) => {
@@ -72,6 +78,7 @@ async function main() {
       team: { costCentre, staff },
       events,
     } = result;
+    
     const processedCalendarEvents = processCalendarEvents(
       events,
       bankHolidays,

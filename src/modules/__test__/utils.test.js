@@ -1,9 +1,12 @@
+const parseISO = require("date-fns/parseISO");
+
 const { processCalendarEvents } = require("../processCalendarEvents");
 
 const {
   printCSV,
   summariseRotationsByTimesheet,
   totalRotations,
+  getPayDate,
 } = require("../utils");
 
 const {
@@ -17,6 +20,8 @@ const {
     teams: [{ staff, costCentre }],
   },
 } = require("./mockConfig");
+
+const PAY_DATE_OF_MONTH = 15;
 
 describe("totalRotations", () => {
   test("it prints totals", () => {
@@ -32,12 +37,6 @@ describe("totalRotations", () => {
     expect(totals).toEqual(expected);
   });
 });
-
-describe('addDateRangeToCalendarUrl', () => {
-  test("inserts dates into team calendar URL", () => {
-
-  });
-})
 
 describe("summariseRotationsByTimesheet", () => {
   test("it prints Timesheet summary", () => {
@@ -55,43 +54,37 @@ describe("summariseRotationsByTimesheet", () => {
         "Todd Bonzalez": 1,
         "Bobson Dugnutt": 1,
         "Willie Dustice": 1,
+        "Dorse O Hintline": 1,
       },
       "Apr-May": {
-        "Dorse O Hintline": 1,
-        "Todd Bonzalez": 1,
+        "Todd Bonzalez": 2,
         "Bobson Dugnutt": 1,
         "Willie Dustice": 1,
+        "Dorse O Hintline": 1,
       },
       "May-Jun": {
-        "Dorse O Hintline": 1,
-        "Todd Bonzalez": 1,
         "Willie Dustice": 2,
         "Bobson Dugnutt": 1,
+        "Dorse O Hintline": 1,
       },
       "Jun-Jul": {
-        "Dorse O Hintline": 2,
-        "Todd Bonzalez": 1,
-        "Bobson Dugnutt": 1,
-        "Willie Dustice": 1,
-      },
-      "Jul-Aug": {
-        "Todd Bonzalez": 1,
+        "Todd Bonzalez": 2,
         "Bobson Dugnutt": 1,
         "Willie Dustice": 1,
         "Dorse O Hintline": 1,
       },
-      "Aug-Sep": {
+      "Jul-Aug": {
         "Bobson Dugnutt": 2,
         "Willie Dustice": 1,
         "Dorse O Hintline": 1,
       },
-      "Sep-Oct": {
+      "Aug-Sep": {
+        "Willie Dustice": 1,
         "Dorse O Hintline": 2,
-        "Bobson Dugnutt": 1,
-        "Willie Dustice": 2,
+        "Bobson Dugnutt": 2,
       },
+      "Sep-Oct": { "Willie Dustice": 2, "Dorse O Hintline": 1 },
     };
-
     expect(summary).toEqual(expected);
   });
 });
@@ -139,5 +132,30 @@ describe("printCSV", () => {
 555555D,Dorse O Hintline,S1234,On-Call: 29/09/2021 - 05/10/2021,,,5,2,0`;
 
     expect(csv).toEqual(expectedCSV);
+  });
+});
+
+describe("getPayDay", () => {
+  test("payday on friday if 15th falls on weekend", () => {
+    const date = parseISO("2021-08-15T00:00:00.000Z");
+    const payDay = getPayDate(date, PAY_DATE_OF_MONTH);
+
+    const expected = parseISO("2021-08-13T00:00:00.000Z");
+    expect(payDay).toEqual(expected);
+  });
+
+  test("payday on 15th", () => {
+    const date = parseISO("2021-09-22T00:00:00.000Z");
+    const payDay = getPayDate(date, PAY_DATE_OF_MONTH);
+
+    const expected = parseISO("2021-09-15T00:00:00.000Z");
+    expect(payDay).toEqual(expected);
+  });
+
+  test("function does not have side effects", () => {
+    const date = parseISO("2021-09-22T00:00:00.000Z");
+    const clone = new Date(date);
+    getPayDate(date, PAY_DATE_OF_MONTH);
+    expect(date).toEqual(clone);
   });
 });

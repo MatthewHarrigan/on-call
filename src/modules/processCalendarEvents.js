@@ -1,38 +1,47 @@
 const eachDay = require("date-fns/eachDayOfInterval");
 const isWeekend = require("date-fns/isWeekend");
 const format = require("date-fns/format");
-const subDays = require("date-fns/subDays");
 const subMonths = require("date-fns/subMonths");
 const addMonths = require("date-fns/addMonths");
 const isBefore = require("date-fns/isBefore");
 const parseISO = require("date-fns/parseISO");
-const getName = (event) => event.invitees[0].displayName;
+const { getPayDate } = require("./utils");
+const PAYDAY = 15;
 
-const processCalendarEvents = (events, bankHolidays, staffConfig, costCentre) => {
-  return events.map((event) => {
-    const start = parseISO(event.start);
-    const end = parseISO(event.end);
+const processCalendarEvents = (events, bankHolidays, staffConfig, costCentre) =>
+  events.map((event) => {
+    const {
+      invitees: [{ displayName: eventStaffName }],
+      start,
+      end,
+    } = event;
 
-    const days = eachDay({
-      start: start,
-      end: end,
-    });
+    const eventStart = parseISO(start);
+    const eventEnd = parseISO(end);
 
-    const findStaff = staffConfig.find((staffFromConfig) => {
-      return staffFromConfig.displayName === event.invitees[0].displayName;
-    });
+    // Get staff member from Config
+    const findStaff = staffConfig.find(
+      ({displayName}) => displayName === eventStaffName
+    );
 
     if (!findStaff) {
-      throw Error(`Unexpected staff member in calendar - check config: ${event.invitees[0].displayName}`);
+      throw Error(
+        `Unexpected staff member in calendar - check config: ${eventStaffName}`
+      );
     }
 
-    const staffNumber = findStaff.number;
+    const { number: staffNumber, division: staffLocation } = findStaff;
 
-    const weekends = days.filter(isWeekend).length;
-    const weekdays = days.length - weekends;
-    const bankHols = days.reduce((acc, day) => {
+    const eachDayOfInterval = eachDay({
+      start: eventStart,
+      end: eventEnd,
+    });
+
+    const weekends = eachDayOfInterval.filter(isWeekend).length;
+    const weekdays = eachDayOfInterval.length - weekends;
+    const bankHols = eachDayOfInterval.reduce((acc, day) => {
       if (
-        bankHolidays[findStaff.division].events.find(
+        bankHolidays[staffLocation].events.find(
           ({ date }) => date === format(day, "yyyy-MM-dd")
         )
       ) {
@@ -41,16 +50,12 @@ const processCalendarEvents = (events, bankHolidays, staffConfig, costCentre) =>
       return acc;
     }, 0);
 
-    const name = getName(event)
+    const formatName = eventStaffName
       .split(".")
       .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
       .join(" ");
 
-    let payDay = start;
-    payDay.setDate(15);
-    while (isWeekend(payDay)) {
-      payDay = subDays(payDay, 1);
-    }
+    const payDay = getPayDate(eventStart, PAYDAY);
 
     const datePattern = "MMM";
     const nextMonth = format(addMonths(payDay, 1), datePattern);
@@ -58,24 +63,24 @@ const processCalendarEvents = (events, bankHolidays, staffConfig, costCentre) =>
     const previousMonth = format(subMonths(payDay, 1), datePattern);
 
     // If start date is before payDay put in that month's timesheet here
-    // but if the period is mostly past payDay I'll discretionally bump to next month manually
-    const timesheet = isBefore(start, payDay)
-      ? `${previousMonth}-${currentMonth}`
-      : `${currentMonth}-${nextMonth}`;
+    // but if the period is mostly past payDay I'll sometimes discretionally bump to next month manually
+    const timesheetTitle =
+      isBefore(eventStart, payDay) && isBefore(eventEnd, payDay)
+        ? `${previousMonth}-${currentMonth}`
+        : `${currentMonth}-${nextMonth}`;
 
     return {
-      timesheet: timesheet,
-      start: event.start,
-      end: event.end,
-      timesheet: timesheet,
-      staffNumber: staffNumber,
-      name: name,
+      // timesheet: timesheet,
+      start: start,
+      end: end,
+      timesheet: timesheetTitle,
+      staffNumber,
+      name: formatName,
       cost: costCentre,
-      weekdays: weekdays,
-      weekends: weekends,
-      bankHols: bankHols,
+      weekdays,
+      weekends,
+      bankHols,
     };
   });
-};
 
 module.exports = { processCalendarEvents };
