@@ -1,36 +1,39 @@
 const getDate = (day) => format(day, "dd/MM/yyyy");
 const format = require("date-fns/format");
 const parseISO = require("date-fns/parseISO");
+const isWeekend = require("date-fns/isWeekend");
+const previousFriday = require("date-fns/previousFriday");
+const setDate = require("date-fns/setDate");
 
 function printCSV(processedCalendarEvents, costCentre) {
   return processedCalendarEvents
-    .map((event) =>
+    .map(({staffNumber, name, weekdays, weekends, bankHols, start, end}) =>
       [
-        event.staffNumber,
-        event.name,
+        staffNumber,
+        name,
         costCentre,
-        `On-Call: ${getDate(parseISO(event.start))} - ${getDate(
-          parseISO(event.end)
+        `On-Call: ${getDate(parseISO(start))} - ${getDate(
+          parseISO(end)
         )}`,
         "",
         "",
-        event.weekdays,
-        event.weekends,
-        event.bankHols,
+        weekdays,
+        weekends,
+        bankHols,
       ].join(",")
     )
     .join("\n");
 }
 
 function summariseRotationsByTimesheet(processedCalendarEvents) {
-  return processedCalendarEvents.reduce((obj, rotation) => {
-    if (!obj[rotation.timesheet]) {
-      obj[rotation.timesheet] = { [rotation.name]: 1 };
+  return processedCalendarEvents.reduce((obj, {timesheet, name}) => {
+    if (!obj[timesheet]) {
+      obj[timesheet] = { [name]: 1 };
     } else {
-      if (!obj[rotation.timesheet][rotation.name]) {
-        obj[rotation.timesheet][rotation.name] = 1;
+      if (!obj[timesheet][name]) {
+        obj[timesheet][name] = 1;
       } else {
-        obj[rotation.timesheet][rotation.name] += 1;
+        obj[timesheet][name] += 1;
       }
     }
 
@@ -43,7 +46,7 @@ function totalRotations(processedCalendarEvents) {
     .flatMap((event) => event.invitees[0].displayName)
     .reduce((allNames, name) => {
       if (name in allNames) {
-        allNames[name]++;
+        allNames[name] += 1;
       } else {
         allNames[name] = 1;
       }
@@ -59,15 +62,24 @@ function totalRotations(processedCalendarEvents) {
 function addDateRangeToCalendarUrl(start, end, url) {
   const startDateWithoutMS = start.toISOString().slice(0, -5) + "Z";
   const endDateWithoutMS = end.toISOString().slice(0, -5) + "Z";
-  const urlWithUserStartDate = url.replace(
+  return url.replace(
     /START/g,
     encodeURI(startDateWithoutMS)
-  );
-  const urlWithUserEndDate = urlWithUserStartDate.replace(
+  ).replace(
     /END/g,
     encodeURI(endDateWithoutMS)
   );
-  return urlWithUserEndDate;
 }
 
-module.exports = { printCSV, summariseRotationsByTimesheet, totalRotations, addDateRangeToCalendarUrl };
+function getPayDate(date, companyPayDay) {
+  const payday = setDate(date, companyPayDay);
+  return isWeekend(payday) ? previousFriday(payday) : payday;
+}
+
+module.exports = {
+  printCSV,
+  summariseRotationsByTimesheet,
+  totalRotations,
+  addDateRangeToCalendarUrl,
+  getPayDate,
+};
