@@ -14,13 +14,16 @@ const {
 
 const { mockProcessedEvents } = require('./mockProcessedEvents');
 
+const defaultPayDay = 15;
+
 describe("processCalendarEvents", () => {
   test("it processes calendar events", () => {
     const processed = processCalendarEvents(
       events,
       bankHolidays,
       staff,
-      costCentre
+      costCentre,
+      defaultPayDay
     );
     expect(processed).toEqual(mockProcessedEvents);
   });

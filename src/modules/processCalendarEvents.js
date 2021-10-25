@@ -6,9 +6,8 @@ const addMonths = require("date-fns/addMonths");
 const isBefore = require("date-fns/isBefore");
 const parseISO = require("date-fns/parseISO");
 const { getPayDate } = require("./utils");
-const PAYDAY = 15;
 
-const processCalendarEvents = (events, bankHolidays, staffConfig, costCentre) =>
+const processCalendarEvents = (events, bankHolidays, staffConfig, costCentre, defaultPayDay) =>
   events.map((event) => {
     const {
       invitees: [{ displayName: eventStaffName }],
@@ -55,7 +54,7 @@ const processCalendarEvents = (events, bankHolidays, staffConfig, costCentre) =>
       .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
       .join(" ");
 
-    const payDay = getPayDate(eventStart, PAYDAY);
+    const payDay = getPayDate(eventStart, defaultPayDay);
 
     const datePattern = "MMM";
     const nextMonth = format(addMonths(payDay, 1), datePattern);

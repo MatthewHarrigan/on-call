@@ -22,6 +22,7 @@ const {
   addDateRangeToCalendarUrl,
 } = require("./utils");
 
+const defaultPayDay = 15;
 const { processCalendarEvents } = require("./processCalendarEvents");
 
 const inquirer = require("inquirer");
@@ -78,12 +79,13 @@ async function main() {
       team: { costCentre, staff },
       events,
     } = result;
-    
+
     const processedCalendarEvents = processCalendarEvents(
       events,
       bankHolidays,
       staff,
-      costCentre
+      costCentre,
+      defaultPayDay
     );
     console.log("\n<copy-paste this into Excel>\n");
 
