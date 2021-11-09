@@ -1,9 +1,12 @@
 const fetch = require("node-fetch");
 
+const https = require("https");
+
 const { newAgent } = require("../../httpClient/agents");
 
 const agentConfig = {
-  ca: "/etc/pki/cloud-ca.pem",
+  // ca: "/etc/pki/cloud-ca.pem",
+  ca: '/etc/pki/tls/certs/ca-bundle.crt',
   cert: "/etc/pki/tls/certs/client.crt",
   key: "/etc/pki/tls/private/client.key",
 };
@@ -57,16 +60,75 @@ async function fetchCalendarEventsByDateRange(team, start, end) {
     end,
     teamCalendarAPI
   );
-  const response = await fetch(urlWithUserEndDate, requestOptions);
-  const { events } = await response.json();
-  return { team, events };
+  // const response = await fetch(urlWithUserEndDate, requestOptions);
+  // const { events } = await response.json();
+
+console.log(urlWithUserEndDate)
+  try {
+
+    let dataString = '';
+    const response = await new Promise((resolve, reject) => {
+      const req = https.get(urlWithUserEndDate, requestOptions, function (res) {
+        res.on("data", (chunk) => {
+          dataString += chunk;
+        });
+        res.on("end", () => {
+          resolve({
+            statusCode: 200,
+            body: JSON.stringify(JSON.parse(dataString), null, 4),
+          });
+        });
+      });
+  
+      req.on("error", (e) => {
+        reject({
+          statusCode: 500,
+          body: "Something went wrong!",
+        });
+      });
+    });
+
+    const { events } = JSON.parse(response.body);
+    return { team, events };
+
+  } catch (error) {
+    console.log(error);
+  }
+
 }
 
 async function main() {
   const { userStart, userEnd } = await inquirer.prompt(questions);
 
-  const fetchBankhols = await fetch("https://www.gov.uk/bank-holidays.json");
-  const bankHolidays = await fetchBankhols.json();
+  let dataString = '';
+  let bankHolidays = [];
+  try {
+
+    const response = await new Promise((resolve, reject) => {
+      const req = https.get("https://www.gov.uk/bank-holidays.json", function (res) {
+        res.on("data", (chunk) => {
+          dataString += chunk;
+        });
+        res.on("end", () => {
+          resolve({
+            statusCode: 200,
+            body: JSON.stringify(JSON.parse(dataString), null, 4),
+          });
+        });
+      });
+  
+      req.on("error", (e) => {
+        reject({
+          statusCode: 500,
+          body: "Something went wrong!",
+        });
+      });
+    });
+
+    bankHolidays = JSON.parse(response.body);
+  } catch (error) {
+    console.log(error);
+  }
 
   const calendarEventResults = await Promise.all(
     teams.map((team) =>
