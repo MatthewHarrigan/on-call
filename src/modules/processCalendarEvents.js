@@ -1,11 +1,11 @@
-const format = require("date-fns/format");
-const parseISO = require("date-fns/parseISO");
-const { getPayDate } = require("./utils");
+const previousFriday = require("date-fns/previousFriday");
 
+function eachDayOfInterval(s, e) {
+  const end = new Date(e);
+  let current = new Date(s);
 
-function eachDayOfInterval({ start, end }) {
   const result = [];
-  let current = new Date(start);
+
   while (current <= end) {
     result.push(new Date(current));
     current.setDate(current.getDate() + 1);
@@ -39,17 +39,15 @@ const processCalendarEvents = ({
         );
       }
 
-      const eventStart = parseISO(start);
-      const eventEnd = parseISO(end);
+      const eachDay = eachDayOfInterval(start, end);
 
-      const eachDay = eachDayOfInterval({ start: eventStart, end: eventEnd });
 
       const weekends = eachDay.filter(isWeekend).length;
       const weekdays = eachDay.length - weekends;
       const bankHols = eachDay.reduce((acc, day) => {
         if (
           bankHolidays[staffRegion].events.find(
-            ({ date }) => date === format(day, "yyyy-MM-dd")
+            ({ date }) => date === day.toISOString().split('T')[0]
           )
         ) {
           acc += 1;
@@ -62,7 +60,12 @@ const processCalendarEvents = ({
         .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
         .join(" ");
 
-      const payDay = getPayDate(eventStart, defaultPayDay);
+      // const payDay = getPayDate(parseISO(start), defaultPayDay);
+
+      const d = new Date(start);
+      d.setDate(defaultPayDay);
+      const payDay = isWeekend(d) ? new Date(previousFriday(d)) : new Date(d);
+
 
       const nextMonth = new Date(payDay);
       nextMonth.setMonth(nextMonth.getMonth() + 1);
@@ -72,21 +75,19 @@ const processCalendarEvents = ({
 
       const previousMonth = new Date(payDay);
       previousMonth.setMonth(previousMonth.getMonth() - 1);
-
       const previousMonthFormatted = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(previousMonth)
 
       // If start date is before payDay put in that month's timesheet here
       // but if the period is mostly past payDay I'll sometimes discretionally bump to next month manually
 
       const timesheetTitle =
-        eventStart < payDay && eventEnd < payDay
+      new Date(start) < payDay && new Date(end) < payDay
           ? `${previousMonthFormatted}-${currentMonthFormatted}`
           : `${currentMonthFormatted}-${nextMonthFormatted}`;
 
       return {
-        // timesheet: timesheet,
-        start: start,
-        end: end,
+        start,
+        end,
         timesheet: timesheetTitle,
         staffNumber,
         name: formatName,
