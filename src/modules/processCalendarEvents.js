@@ -1,4 +1,3 @@
-const previousFriday = require("date-fns/previousFriday");
 
 function eachDayOfInterval(s, e) {
   const end = new Date(e);
@@ -16,6 +15,19 @@ function eachDayOfInterval(s, e) {
 function isWeekend(date) {
   const day = date.getDay();
   return day === 0 || day === 6;
+}
+
+function previousFriday(date) {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = (day <= 5) ? (7 - 5 + day ) : (day - 5);
+
+  d.setDate(d.getDate() - diff);
+  d.setHours(0);
+  d.setMinutes(0);
+  d.setSeconds(0);
+
+  return d.getTime();
 }
 
 // This maps the days from the confluence calendar and calculates weekends etc
@@ -62,7 +74,7 @@ const processCalendarEvents = ({
 
       const d = new Date(start);
       d.setDate(defaultPayDay);
-      const payDay = isWeekend(d) ? new Date(previousFriday(d)) : d;
+      const payDay = isWeekend(d) ? previousFriday(d) : d;
 
       const nextMonth = new Date(payDay);
       nextMonth.setMonth(nextMonth.getMonth() + 1);
