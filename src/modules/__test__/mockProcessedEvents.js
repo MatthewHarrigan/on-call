@@ -245,7 +245,7 @@ const mockProcessedEvents = [
   {
     start: '2021-08-11T00:00:00.000Z',
     end: '2021-08-17T00:00:00.000Z',
-    timesheet: 'Aug-Sep',
+    timesheet: 'Aug-Sept',
     staffNumber: '555555C',
     name: 'Willie Dustice',
     cost: 'S1234',
@@ -256,7 +256,7 @@ const mockProcessedEvents = [
   {
     start: '2021-08-18T00:00:00.000Z',
     end: '2021-08-24T00:00:00.000Z',
-    timesheet: 'Aug-Sep',
+    timesheet: 'Aug-Sept',
     staffNumber: '555555D',
     name: 'Dorse O Hintline',
     cost: 'S1234',
@@ -267,7 +267,7 @@ const mockProcessedEvents = [
   {
     start: '2021-08-25T00:00:00.000Z',
     end: '2021-08-31T00:00:00.000Z',
-    timesheet: 'Aug-Sep',
+    timesheet: 'Aug-Sept',
     staffNumber: '555555B',
     name: 'Bobson Dugnutt',
     cost: 'S1234',
@@ -278,7 +278,7 @@ const mockProcessedEvents = [
   {
     start: '2021-09-01T00:00:00.000Z',
     end: '2021-09-07T00:00:00.000Z',
-    timesheet: 'Aug-Sep',
+    timesheet: 'Aug-Sept',
     staffNumber: '555555D',
     name: 'Dorse O Hintline',
     cost: 'S1234',
@@ -289,7 +289,7 @@ const mockProcessedEvents = [
   {
     start: '2021-09-08T00:00:00.000Z',
     end: '2021-09-14T00:00:00.000Z',
-    timesheet: 'Aug-Sep',
+    timesheet: 'Aug-Sept',
     staffNumber: '555555B',
     name: 'Bobson Dugnutt',
     cost: 'S1234',
@@ -300,7 +300,7 @@ const mockProcessedEvents = [
   {
     start: '2021-09-15T00:00:00.000Z',
     end: '2021-09-21T00:00:00.000Z',
-    timesheet: 'Sep-Oct',
+    timesheet: 'Sept-Oct',
     staffNumber: '555555C',
     name: 'Willie Dustice',
     cost: 'S1234',
@@ -311,7 +311,7 @@ const mockProcessedEvents = [
   {
     start: '2021-09-22T00:00:00.000Z',
     end: '2021-09-28T00:00:00.000Z',
-    timesheet: 'Sep-Oct',
+    timesheet: 'Sept-Oct',
     staffNumber: '555555C',
     name: 'Willie Dustice',
     cost: 'S1234',
@@ -322,7 +322,7 @@ const mockProcessedEvents = [
   {
     start: '2021-09-29T00:00:00.000Z',
     end: '2021-10-05T00:00:00.000Z',
-    timesheet: 'Sep-Oct',
+    timesheet: 'Sept-Oct',
     staffNumber: '555555D',
     name: 'Dorse O Hintline',
     cost: 'S1234',

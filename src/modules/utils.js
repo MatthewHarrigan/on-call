@@ -1,10 +1,3 @@
-const getDate = (day) => format(day, "dd/MM/yyyy");
-const format = require("date-fns/format");
-const parseISO = require("date-fns/parseISO");
-const isWeekend = require("date-fns/isWeekend");
-const previousFriday = require("date-fns/previousFriday");
-const setDate = require("date-fns/setDate");
-
 function printCSV(processedCalendarEvents, costCentre) {
   return processedCalendarEvents
     .map(({staffNumber, name, weekdays, weekends, bankHols, start, end}) =>
@@ -12,9 +5,7 @@ function printCSV(processedCalendarEvents, costCentre) {
         staffNumber,
         name,
         costCentre,
-        `On-Call: ${getDate(parseISO(start))} - ${getDate(
-          parseISO(end)
-        )}`,
+        `On-Call: ${new Date(start).toLocaleString().split(',')[0]} - ${new Date(end).toLocaleString().split(',')[0]}`,
         "",
         "",
         weekdays,
@@ -71,15 +62,9 @@ function addDateRangeToCalendarUrl(start, end, url) {
   );
 }
 
-function getPayDate(date, companyPayDay) {
-  const payday = setDate(date, companyPayDay);
-  return isWeekend(payday) ? previousFriday(payday) : payday;
-}
-
 module.exports = {
   printCSV,
   summariseRotationsByTimesheet,
   totalRotations,
   addDateRangeToCalendarUrl,
-  getPayDate,
 };
