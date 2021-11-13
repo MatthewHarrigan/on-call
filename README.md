@@ -25,15 +25,10 @@ Make sure your certs are discoverable by the https client e.g.
 - /etc/pki/cosmos/current/client.crt
 - /etc/pki/tls/certs/ca-bundle.crt
 
-## Clone repo
+## Install
 
 ```bash
 git clone git@github.com:bbc/on-call.git && cd ./on-call
-```
-
-## Yarn install
-
-```bash
 yarn install
 ```
 
@@ -57,7 +52,7 @@ The config.json will contain values for your team: staff, charge code and Conflu
       "costCentre": "<your team's charge code>",
       "teamCalendarAPI": "<jira calendar url>"
     },
-        {
+    {
       "team": "<team name>",
       "staff": [
         {
