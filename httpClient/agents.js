@@ -4,9 +4,9 @@ const https = require('https');
 const { loadCA, loadCertificate, loadKey } = require('./ssl');
 
 const defaultCAs = [
-  '/etc/pki/cloud-ca.pem',
-  '/etc/pki/cosmos/current/client.crt',
-  '/etc/pki/tls/certs/ca-bundle.crt',
+  // '/etc/pki/cloud-ca.pem',
+  // '/etc/pki/cosmos/current/client.crt',
+  // '/etc/pki/tls/certs/ca-bundle.crt',
 ];
 
 const protocols = {

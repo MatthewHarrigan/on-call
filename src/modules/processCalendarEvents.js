@@ -1,85 +1,101 @@
-const eachDay = require("date-fns/eachDayOfInterval");
-const isWeekend = require("date-fns/isWeekend");
 const format = require("date-fns/format");
-const subMonths = require("date-fns/subMonths");
-const addMonths = require("date-fns/addMonths");
-const isBefore = require("date-fns/isBefore");
 const parseISO = require("date-fns/parseISO");
 const { getPayDate } = require("./utils");
 
-const processCalendarEvents = (events, bankHolidays, staffConfig, costCentre, defaultPayDay) =>
-  events.map((event) => {
-    const {
-      invitees: [{ displayName: eventStaffName }],
-      start,
-      end,
-    } = event;
+// This maps the days from the confluence calendar and calculates weekends etc
 
-    const eventStart = parseISO(start);
-    const eventEnd = parseISO(end);
+const processCalendarEvents = ({
+  calendarEvents,
+  bankHolidays,
+  userStaffConfig,
+  costCentre,
+  defaultPayDay,
+}) =>
+  calendarEvents.map(
+    ({ invitees: [{ displayName: eventStaffName }], start, end }) => {
+      const { number: staffNumber, division: staffRegion } =
+        userStaffConfig.find(
+          ({ displayName }) => displayName === eventStaffName
+        ) || {};
 
-    // Get staff member from Config
-    const findStaff = staffConfig.find(
-      ({displayName}) => displayName === eventStaffName
-    );
-
-    if (!findStaff) {
-      throw Error(
-        `Unexpected staff member in calendar - check config: ${eventStaffName}`
-      );
-    }
-
-    const { number: staffNumber, division: staffLocation } = findStaff;
-
-    const eachDayOfInterval = eachDay({
-      start: eventStart,
-      end: eventEnd,
-    });
-
-    const weekends = eachDayOfInterval.filter(isWeekend).length;
-    const weekdays = eachDayOfInterval.length - weekends;
-    const bankHols = eachDayOfInterval.reduce((acc, day) => {
-      if (
-        bankHolidays[staffLocation].events.find(
-          ({ date }) => date === format(day, "yyyy-MM-dd")
-        )
-      ) {
-        acc += 1;
+      if (!staffNumber && !staffRegion) {
+        throw Error(
+          `Unexpected staff member found in calendar - check config: ${eventStaffName}`
+        );
       }
-      return acc;
-    }, 0);
 
-    const formatName = eventStaffName
-      .split(".")
-      .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
-      .join(" ");
+      const eventStart = parseISO(start);
+      const eventEnd = parseISO(end);
 
-    const payDay = getPayDate(eventStart, defaultPayDay);
+      function eachDayOfInterval({ start, end }) {
+        const result = [];
+        let current = new Date(start);
+        while (current <= end) {
+          result.push(new Date(current));
+          current.setDate(current.getDate() + 1);
+        }
+        return result;
+      }
 
-    const datePattern = "MMM";
-    const nextMonth = format(addMonths(payDay, 1), datePattern);
-    const currentMonth = format(payDay, datePattern);
-    const previousMonth = format(subMonths(payDay, 1), datePattern);
+      const eachDay = eachDayOfInterval({ start: eventStart, end: eventEnd });
 
-    // If start date is before payDay put in that month's timesheet here
-    // but if the period is mostly past payDay I'll sometimes discretionally bump to next month manually
-    const timesheetTitle =
-      isBefore(eventStart, payDay) && isBefore(eventEnd, payDay)
-        ? `${previousMonth}-${currentMonth}`
-        : `${currentMonth}-${nextMonth}`;
+      function isWeekend(date) {
+        const day = date.getDay();
+        return day === 0 || day === 6;
+      }
 
-    return {
-      // timesheet: timesheet,
-      start: start,
-      end: end,
-      timesheet: timesheetTitle,
-      staffNumber,
-      name: formatName,
-      cost: costCentre,
-      weekdays,
-      weekends,
-      bankHols,
-    };
-  });
+      const weekends = eachDay.filter(isWeekend).length;
+      const weekdays = eachDay.length - weekends;
+      const bankHols = eachDay.reduce((acc, day) => {
+        if (
+          bankHolidays[staffRegion].events.find(
+            ({ date }) => date === format(day, "yyyy-MM-dd")
+          )
+        ) {
+          acc += 1;
+        }
+        return acc;
+      }, 0);
+
+      const formatName = eventStaffName
+        .split(".")
+        .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
+        .join(" ");
+
+      const payDay = getPayDate(eventStart, defaultPayDay);
+
+      const nextMonth = new Date(payDay);
+      nextMonth.setMonth(nextMonth.getMonth() + 1);
+      const nextMonthFormatted = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(nextMonth)
+
+      const currentMonthFormatted = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(payDay)
+
+      const previousMonth = new Date(payDay);
+      previousMonth.setMonth(previousMonth.getMonth() - 1);
+
+      const previousMonthFormatted = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(previousMonth)
+
+      // If start date is before payDay put in that month's timesheet here
+      // but if the period is mostly past payDay I'll sometimes discretionally bump to next month manually
+
+      const timesheetTitle =
+        eventStart < payDay && eventEnd < payDay
+          ? `${previousMonthFormatted}-${currentMonthFormatted}`
+          : `${currentMonthFormatted}-${nextMonthFormatted}`;
+
+      return {
+        // timesheet: timesheet,
+        start: start,
+        end: end,
+        timesheet: timesheetTitle,
+        staffNumber,
+        name: formatName,
+        cost: costCentre,
+        weekdays,
+        weekends,
+        bankHols,
+      };
+    }
+  );
 
 module.exports = { processCalendarEvents };

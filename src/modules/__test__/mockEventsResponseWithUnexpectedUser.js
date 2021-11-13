@@ -1209,8 +1209,8 @@ const response = {
         allDay: true,
         iconLink:
           "https://confluence/display/~2c97c56361507d600163ac18c7ff041f",
-        localizedStartDate: "01-Sep-2021",
-        confluenceFormattedStartDate: "01 Sep, 2021",
+        localizedStartDate: "01-Sept-2021",
+        confluenceFormattedStartDate: "01 Sept, 2021",
         invitees: [
           {
             displayName: "dorse.o.hintline",
@@ -1227,7 +1227,7 @@ const response = {
         iconUrl:
           "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
-        localizedEndDate: "07-Sep-2021",
+        localizedEndDate: "07-Sept-2021",
         originalStartDateTime: "2021-09-01T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
@@ -1240,13 +1240,13 @@ const response = {
         eventType: "custom",
         textColor: "#FFFFFF",
         subCalendarId: "ad37c355-3d91-4e31-ac83-de8dbf03cf92",
-        localizedOriginalStartDate: "01-Sep-2021",
+        localizedOriginalStartDate: "01-Sept-2021",
         secondaryBorderColor: "#d8d3f2",
         localizedEndTime: "0:00",
         calendarReloadRequiredOnUpdate: false,
         originalEndDateTime: "2021-09-07T00:00:00.000Z",
         localizedStartTime: "0:00",
-        localizedOriginalEndDate: "07-Sep-2021",
+        localizedOriginalEndDate: "07-Sept-2021",
         colorScheme: "subcalendar-purple4",
       },
       {
@@ -1257,8 +1257,8 @@ const response = {
         allDay: true,
         iconLink:
           "https://confluence/display/~2c97891b4ad4899c014ad49a7ddf2581",
-        localizedStartDate: "08-Sep-2021",
-        confluenceFormattedStartDate: "08 Sep, 2021",
+        localizedStartDate: "08-Sept-2021",
+        confluenceFormattedStartDate: "08 Sept, 2021",
         invitees: [
           {
             displayName: "Bobson Dugnutt",
@@ -1275,7 +1275,7 @@ const response = {
         iconUrl:
           "https://confluence/images/icons/profilepics/default.svg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
-        localizedEndDate: "14-Sep-2021",
+        localizedEndDate: "14-Sept-2021",
         originalStartDateTime: "2021-09-08T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
@@ -1288,13 +1288,13 @@ const response = {
         eventType: "custom",
         textColor: "#FFFFFF",
         subCalendarId: "ad37c355-3d91-4e31-ac83-de8dbf03cf92",
-        localizedOriginalStartDate: "08-Sep-2021",
+        localizedOriginalStartDate: "08-Sept-2021",
         secondaryBorderColor: "#d8d3f2",
         localizedEndTime: "0:00",
         calendarReloadRequiredOnUpdate: false,
         originalEndDateTime: "2021-09-14T00:00:00.000Z",
         localizedStartTime: "0:00",
-        localizedOriginalEndDate: "14-Sep-2021",
+        localizedOriginalEndDate: "14-Sept-2021",
         colorScheme: "subcalendar-purple4",
       },
       {
@@ -1305,8 +1305,8 @@ const response = {
         allDay: true,
         iconLink:
           "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
-        localizedStartDate: "15-Sep-2021",
-        confluenceFormattedStartDate: "15 Sep, 2021",
+        localizedStartDate: "15-Sept-2021",
+        confluenceFormattedStartDate: "15 Sept, 2021",
         invitees: [
           {
             displayName: "Willie Dustice",
@@ -1323,7 +1323,7 @@ const response = {
         iconUrl:
           "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
-        localizedEndDate: "21-Sep-2021",
+        localizedEndDate: "21-Sept-2021",
         originalStartDateTime: "2021-09-15T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
@@ -1336,13 +1336,13 @@ const response = {
         eventType: "custom",
         textColor: "#FFFFFF",
         subCalendarId: "ad37c355-3d91-4e31-ac83-de8dbf03cf92",
-        localizedOriginalStartDate: "15-Sep-2021",
+        localizedOriginalStartDate: "15-Sept-2021",
         secondaryBorderColor: "#d8d3f2",
         localizedEndTime: "0:00",
         calendarReloadRequiredOnUpdate: false,
         originalEndDateTime: "2021-09-21T00:00:00.000Z",
         localizedStartTime: "0:00",
-        localizedOriginalEndDate: "21-Sep-2021",
+        localizedOriginalEndDate: "21-Sept-2021",
         colorScheme: "subcalendar-purple4",
       },
       {
@@ -1353,8 +1353,8 @@ const response = {
         allDay: true,
         iconLink:
           "https://confluence/display/~2c97891b4ad4899c014ad49a814a2cfe",
-        localizedStartDate: "22-Sep-2021",
-        confluenceFormattedStartDate: "22 Sep, 2021",
+        localizedStartDate: "22-Sept-2021",
+        confluenceFormattedStartDate: "22 Sept, 2021",
         invitees: [
           {
             displayName: "Willie Dustice",
@@ -1371,7 +1371,7 @@ const response = {
         iconUrl:
           "https://confluence/download/attachments/49917046/willie.dustice@bbc.co.uk-49078-pp-641272.jpg",
         customEventTypeId: "f4bdaf83-d872-4343-832f-9b335f760614",
-        localizedEndDate: "28-Sep-2021",
+        localizedEndDate: "28-Sept-2021",
         originalStartDateTime: "2021-09-22T00:00:00.000Z",
         backgroundColor: "#8777D9",
         mediumIconUrl:
@@ -1384,13 +1384,13 @@ const response = {
         eventType: "custom",
         textColor: "#FFFFFF",
         subCalendarId: "ad37c355-3d91-4e31-ac83-de8dbf03cf92",
-        localizedOriginalStartDate: "22-Sep-2021",
+        localizedOriginalStartDate: "22-Sept-2021",
         secondaryBorderColor: "#d8d3f2",
         localizedEndTime: "0:00",
         calendarReloadRequiredOnUpdate: false,
         originalEndDateTime: "2021-09-28T00:00:00.000Z",
         localizedStartTime: "0:00",
-        localizedOriginalEndDate: "28-Sep-2021",
+        localizedOriginalEndDate: "28-Sept-2021",
         colorScheme: "subcalendar-purple4",
       },
       {
@@ -1401,8 +1401,8 @@ const response = {
         allDay: true,
         iconLink:
           "https://confluence/display/~2c97c56361507d600163ac18c7ff041f",
-        localizedStartDate: "29-Sep-2021",
-        confluenceFormattedStartDate: "29 Sep, 2021",
+        localizedStartDate: "29-Sept-2021",
+        confluenceFormattedStartDate: "29 Sept, 2021",
         invitees: [
           {
             displayName: "dorse.o.hintline",
@@ -1432,7 +1432,7 @@ const response = {
         eventType: "custom",
         textColor: "#FFFFFF",
         subCalendarId: "ad37c355-3d91-4e31-ac83-de8dbf03cf92",
-        localizedOriginalStartDate: "29-Sep-2021",
+        localizedOriginalStartDate: "29-Sept-2021",
         secondaryBorderColor: "#d8d3f2",
         localizedEndTime: "0:00",
         calendarReloadRequiredOnUpdate: false,

@@ -21,7 +21,7 @@ const {
   },
 } = require("./mockConfig");
 
-const defaultPayDay = 15;
+const DEFAULT_PAYDAY_OF_MONTH = 15;
 
 describe("totalRotations", () => {
   test("it prints totals", () => {
@@ -41,11 +41,13 @@ describe("totalRotations", () => {
 describe("summariseRotationsByTimesheet", () => {
   test("it prints Timesheet summary", () => {
     const processedCalendarEvents = processCalendarEvents(
-      events,
-      bankHolidays,
-      staff,
-      costCentre,
-      defaultPayDay
+      {
+        bankHolidays,
+        calendarEvents: events,
+        costCentre,
+        defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
+        userStaffConfig: staff,
+      }
     );
 
     const summary = summariseRotationsByTimesheet(processedCalendarEvents);
@@ -79,12 +81,12 @@ describe("summariseRotationsByTimesheet", () => {
         "Willie Dustice": 1,
         "Dorse O Hintline": 1,
       },
-      "Aug-Sep": {
+      "Aug-Sept": {
         "Willie Dustice": 1,
         "Dorse O Hintline": 2,
         "Bobson Dugnutt": 2,
       },
-      "Sep-Oct": { "Willie Dustice": 2, "Dorse O Hintline": 1 },
+      "Sept-Oct": { "Willie Dustice": 2, "Dorse O Hintline": 1 },
     };
     expect(summary).toEqual(expected);
   });
@@ -93,11 +95,13 @@ describe("summariseRotationsByTimesheet", () => {
 describe("printCSV", () => {
   test("it prints calendar events", () => {
     const processedCalendarEvents = processCalendarEvents(
-      events,
-      bankHolidays,
-      staff,
-      costCentre,
-      defaultPayDay
+      {
+        bankHolidays,
+        calendarEvents: events,
+        costCentre,
+        defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
+        userStaffConfig: staff,
+      }
     );
 
     const csv = printCSV(processedCalendarEvents, costCentre);
@@ -140,7 +144,7 @@ describe("printCSV", () => {
 describe("getPayDay", () => {
   test("payday on friday if 15th falls on weekend", () => {
     const date = parseISO("2021-08-15T00:00:00.000Z");
-    const payDay = getPayDate(date, defaultPayDay);
+    const payDay = getPayDate(date, DEFAULT_PAYDAY_OF_MONTH);
 
     const expected = parseISO("2021-08-13T00:00:00.000Z");
     expect(payDay).toEqual(expected);
@@ -148,7 +152,7 @@ describe("getPayDay", () => {
 
   test("payday on 15th", () => {
     const date = parseISO("2021-09-22T00:00:00.000Z");
-    const payDay = getPayDate(date, defaultPayDay);
+    const payDay = getPayDate(date, DEFAULT_PAYDAY_OF_MONTH);
 
     const expected = parseISO("2021-09-15T00:00:00.000Z");
     expect(payDay).toEqual(expected);
@@ -157,7 +161,7 @@ describe("getPayDay", () => {
   test("function does not have side effects", () => {
     const date = parseISO("2021-09-22T00:00:00.000Z");
     const clone = new Date(date);
-    getPayDate(date, defaultPayDay);
+    getPayDate(date, DEFAULT_PAYDAY_OF_MONTH);
     expect(date).toEqual(clone);
   });
 });

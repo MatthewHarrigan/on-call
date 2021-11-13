@@ -12,31 +12,38 @@ const {
   },
 } = require("./mockConfig");
 
-const { mockProcessedEvents } = require('./mockProcessedEvents');
+const { mockProcessedEvents } = require("./mockProcessedEvents");
 
-const defaultPayDay = 15;
+const DEFAULT_PAYDAY_OF_MONTH = 15;
 
 describe("processCalendarEvents", () => {
   test("it processes calendar events", () => {
-    const processed = processCalendarEvents(
-      events,
+    const processed = processCalendarEvents({
       bankHolidays,
-      staff,
+      calendarEvents: events,
       costCentre,
-      defaultPayDay
-    );
+      defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
+      userStaffConfig: staff,
+    });
+
     expect(processed).toEqual(mockProcessedEvents);
   });
-  // test("it errors if unexpected user in response", () => {
-  //   const {
-  //     response: { events },
-  //   } = require("./mockEventsResponseWithUnexpectedUser.js");
 
-  //   const processed = processCalendarEvents(
-  //     events,
-  //     bankHolidays,
-  //     staff,
-  //     costCentre
-  //   );
-  // });
+  test("it errors if unexpected user in response", () => {
+    const {
+      response: { events },
+    } = require("./mockEventsResponseWithUnexpectedUser.js");
+
+    expect(() => {
+      processCalendarEvents({
+        bankHolidays,
+        calendarEvents: events,
+        costCentre,
+        defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
+        userStaffConfig: staff,
+      });
+    }).toThrow(
+      "Unexpected staff member found in calendar - check config: Homer Simpson"
+    );
+  });
 });
