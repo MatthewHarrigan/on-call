@@ -39,8 +39,8 @@ const processCalendarEvents = ({
         );
       }
 
+      // TODO work out what the start and end dates actually are
       const eachDay = eachDayOfInterval(start, end);
-
 
       const weekends = eachDay.filter(isWeekend).length;
       const weekdays = eachDay.length - weekends;
@@ -60,12 +60,9 @@ const processCalendarEvents = ({
         .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
         .join(" ");
 
-      // const payDay = getPayDate(parseISO(start), defaultPayDay);
-
       const d = new Date(start);
       d.setDate(defaultPayDay);
-      const payDay = isWeekend(d) ? new Date(previousFriday(d)) : new Date(d);
-
+      const payDay = isWeekend(d) ? new Date(previousFriday(d)) : d;
 
       const nextMonth = new Date(payDay);
       nextMonth.setMonth(nextMonth.getMonth() + 1);
