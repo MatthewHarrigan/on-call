@@ -9,15 +9,14 @@
   "author": "Matt Harrigan",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "^7.0.4",
+    "inquirer": "^8.2.0",
     "inquirer-datepicker-prompt": "^0.4.2",
-    "jest-fetch-mock": "^3.0.3",
     "node-fetch": "^2.6.1",
-    "yargs": "^16.2.0",
     "yarn": "^1.22.17"
   },
   "repository": "git@github.com:bbc/on-call.git",
   "devDependencies": {
+    "jest-fetch-mock": "^3.0.3",
     "jest": "^27.2.1"
   }
 }
