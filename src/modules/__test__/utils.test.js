@@ -140,28 +140,3 @@ describe("printCSV", () => {
     expect(csv).toEqual(expectedCSV);
   });
 });
-
-describe("getPayDay", () => {
-  test("payday on friday if 15th falls on weekend", () => {
-    const date = parseISO("2021-08-15T00:00:00.000Z");
-    const payDay = getPayDate(date, DEFAULT_PAYDAY_OF_MONTH);
-
-    const expected = parseISO("2021-08-13T00:00:00.000Z");
-    expect(payDay).toEqual(expected);
-  });
-
-  test("payday on 15th", () => {
-    const date = parseISO("2021-09-22T00:00:00.000Z");
-    const payDay = getPayDate(date, DEFAULT_PAYDAY_OF_MONTH);
-
-    const expected = parseISO("2021-09-15T00:00:00.000Z");
-    expect(payDay).toEqual(expected);
-  });
-
-  test("function does not have side effects", () => {
-    const date = parseISO("2021-09-22T00:00:00.000Z");
-    const clone = new Date(date);
-    getPayDate(date, DEFAULT_PAYDAY_OF_MONTH);
-    expect(date).toEqual(clone);
-  });
-});
