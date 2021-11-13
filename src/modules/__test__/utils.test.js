@@ -1,5 +1,3 @@
-const parseISO = require("date-fns/parseISO");
-
 const { processCalendarEvents } = require("../processCalendarEvents");
 
 const {
