@@ -2,8 +2,23 @@ const format = require("date-fns/format");
 const parseISO = require("date-fns/parseISO");
 const { getPayDate } = require("./utils");
 
-// This maps the days from the confluence calendar and calculates weekends etc
 
+function eachDayOfInterval({ start, end }) {
+  const result = [];
+  let current = new Date(start);
+  while (current <= end) {
+    result.push(new Date(current));
+    current.setDate(current.getDate() + 1);
+  }
+  return result;
+}
+
+function isWeekend(date) {
+  const day = date.getDay();
+  return day === 0 || day === 6;
+}
+
+// This maps the days from the confluence calendar and calculates weekends etc
 const processCalendarEvents = ({
   calendarEvents,
   bankHolidays,
@@ -27,22 +42,7 @@ const processCalendarEvents = ({
       const eventStart = parseISO(start);
       const eventEnd = parseISO(end);
 
-      function eachDayOfInterval({ start, end }) {
-        const result = [];
-        let current = new Date(start);
-        while (current <= end) {
-          result.push(new Date(current));
-          current.setDate(current.getDate() + 1);
-        }
-        return result;
-      }
-
       const eachDay = eachDayOfInterval({ start: eventStart, end: eventEnd });
-
-      function isWeekend(date) {
-        const day = date.getDay();
-        return day === 0 || day === 6;
-      }
 
       const weekends = eachDay.filter(isWeekend).length;
       const weekdays = eachDay.length - weekends;
