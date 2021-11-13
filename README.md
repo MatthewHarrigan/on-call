@@ -1,4 +1,4 @@
-# Generate On-call-timesheet csv
+# Generate On-call timesheet csv
 
 Reads Confluence team calendar via the Confluence API and outputs CSV to copypaste into timesheet
 

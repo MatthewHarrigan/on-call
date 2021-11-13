@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 // const https = require("https");
 
-const { newAgent } = require("../../httpClient/agents");
+const { newAgent } = require("../httpClient/agents");
 
 const agentConfig = {
   // ca: "/etc/pki/cloud-ca.pem",
