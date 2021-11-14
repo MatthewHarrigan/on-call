@@ -1,6 +1,6 @@
 const Excel = require("exceljs");
 
-async function writeTimesheet(processedCalendarEvents) {
+async function writeTimesheet(dir, processedCalendarEvents, team) {
   // group events by timesheet e.g. oct-nov
   const eventsByTimesheet = processedCalendarEvents.reduce(
     (obj, { timesheet, ...event }) => {
@@ -44,7 +44,7 @@ async function writeTimesheet(processedCalendarEvents) {
       newworksheet.insertRow(index + 16, rowValues, "o+");
     });
 
-    await newWorkbook.xlsx.writeFile(`${title}.xlsx`);
+    await newWorkbook.xlsx.writeFile(`./${dir}/${team}-${title}.xlsx`);
   }
 }
 

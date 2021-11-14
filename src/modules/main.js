@@ -2,6 +2,8 @@ const fetch = require("node-fetch");
 const Excel = require("exceljs");
 // const https = require("https");
 
+const TIMESHEETS_DIR = 'timesheets'
+
 const { newAgent } = require("../httpClient/agents");
 
 const agentConfig = {
@@ -16,7 +18,7 @@ const requestOptions = {
   method: "GET",
 };
 
-const { teams } = require("../config/config.json");
+const { teams } = require("../config/.config.json");
 
 const {
   printCSV,
@@ -83,10 +85,9 @@ async function main() {
 
   for (result of calendarEventResults) {
     const {
-      config: { costCentre, staff: userStaffConfig },
+      config: { costCentre, staff: userStaffConfig, team },
       events: calendarEvents,
     } = result;
-
     const processedCalendarEvents = processCalendarEvents({
       bankHolidays,
       calendarEvents,
@@ -105,7 +106,7 @@ async function main() {
     const summary = summariseRotationsByTimesheet(processedCalendarEvents);
     console.log("Timesheets summary", "\n\n", summary, "\n");
 
-    await writeTimesheet(processedCalendarEvents);
+    await writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team);
   }
 }
 
