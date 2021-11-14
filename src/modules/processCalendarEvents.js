@@ -1,4 +1,3 @@
-
 function eachDayOfInterval(s, e) {
   const end = new Date(e);
   let current = new Date(s);
@@ -20,7 +19,7 @@ function isWeekend(date) {
 function previousFriday(date) {
   const d = new Date(date);
   const day = d.getDay();
-  const diff = (day <= 5) ? (7 - 5 + day ) : (day - 5);
+  const diff = day <= 5 ? 7 - 5 + day : day - 5;
 
   d.setDate(d.getDate() - diff);
   d.setHours(0);
@@ -37,7 +36,7 @@ const processCalendarEvents = ({
   userStaffConfig,
   costCentre,
   defaultPayDay,
-  team
+  team,
 }) =>
   calendarEvents.map(
     ({ invitees: [{ displayName: eventStaffName }], start, end }) => {
@@ -60,7 +59,7 @@ const processCalendarEvents = ({
       const bankHols = eachDay.reduce((acc, day) => {
         if (
           bankHolidays[staffRegion].events.find(
-            ({ date }) => date === day.toISOString().split('T')[0]
+            ({ date }) => date === day.toISOString().split("T")[0]
           )
         ) {
           acc += 1;
@@ -79,21 +78,45 @@ const processCalendarEvents = ({
 
       const nextMonth = new Date(payDay);
       nextMonth.setMonth(nextMonth.getMonth() + 1);
-      const nextMonthFormatted = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(nextMonth)
+      const nextMonthFormatted = new Intl.DateTimeFormat("en-GB", {
+        month: "short",
+        year: "numeric",
+      })
+        .formatToParts(nextMonth)
+        .map(({ value }) => {
+          return value === " " ? "-" : value;
+        })
+        .join("");
 
-      const currentMonthFormatted = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(payDay)
+      const currentMonthFormatted = new Intl.DateTimeFormat("en-GB", {
+        month: "short",
+        year: "numeric",
+      })
+        .formatToParts(payDay)
+        .map(({ value }) => {
+          return value === " " ? "-" : value;
+        })
+        .join("");
 
       const previousMonth = new Date(payDay);
       previousMonth.setMonth(previousMonth.getMonth() - 1);
-      const previousMonthFormatted = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(previousMonth)
+      const previousMonthFormatted = new Intl.DateTimeFormat("en-GB", {
+        month: "short",
+        year: "numeric",
+      })
+        .formatToParts(previousMonth)
+        .map(({ value }) => {
+          return value === " " ? "-" : value;
+        })
+        .join("");
 
       // If start date is before payDay put in that month's timesheet here
       // but if the period is mostly past payDay I'll sometimes discretionally bump to next month manually
 
       const timesheetTitle =
-      new Date(start) < payDay && new Date(end) < payDay
-          ? `${previousMonthFormatted}-${currentMonthFormatted}`
-          : `${currentMonthFormatted}-${nextMonthFormatted}`;
+        new Date(start) < payDay && new Date(end) < payDay
+          ? `${previousMonthFormatted} ${currentMonthFormatted}`
+          : `${currentMonthFormatted} ${nextMonthFormatted}`;
 
       return {
         start,
@@ -105,7 +128,7 @@ const processCalendarEvents = ({
         weekdays,
         weekends,
         bankHols,
-        team
+        team,
       };
     }
   );

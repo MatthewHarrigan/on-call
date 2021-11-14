@@ -1,6 +1,6 @@
 const Excel = require("exceljs");
 
-async function writeTimesheet(dir, processedCalendarEvents, team) {
+async function writeTimesheet(dir, processedCalendarEvents, team, department) {
   // group events by timesheet e.g. oct-nov
   const eventsByTimesheet = processedCalendarEvents.reduce(
     (obj, { timesheet, ...event }) => {
@@ -23,7 +23,7 @@ async function writeTimesheet(dir, processedCalendarEvents, team) {
     const newworksheet = newWorkbook.getWorksheet("On Call Payments and Hours");
 
     const cellDivision = newworksheet.getCell("E9");
-    cellDivision.value = "{Division / Area}";
+    cellDivision.value = `${department} ${team}`;
 
     const cellPayMonth = newworksheet.getCell("E10");
     cellPayMonth.value = title;
@@ -44,7 +44,7 @@ async function writeTimesheet(dir, processedCalendarEvents, team) {
       newworksheet.insertRow(index + 16, rowValues, "o+");
     });
 
-    const file = `./${dir}/${team}-${title}.xlsx`;
+    const file = `./${dir}/On call Timesheet V3 ${department} ${team} ${title}.xlsx`;
     await newWorkbook.xlsx.writeFile(file);
 
     console.log(`${file}`)

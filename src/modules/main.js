@@ -13,7 +13,7 @@ const requestOptions = {
 
 const TIMESHEETS_DIR = "timesheets";
 const DEFAULT_PAYDAY_OF_MONTH = 15;
-const { teams } = require("../config/.config.json");
+const { departments } = require("../config/config.json");
 
 const {
   printCSV,
@@ -70,62 +70,114 @@ async function main() {
   const fetchBankhols = await fetch("https://www.gov.uk/bank-holidays.json");
   const bankHolidays = await fetchBankhols.json();
 
-  const calendarEventResults = await Promise.all(
-    teams.map((team) =>
-      fetchCalendarEventsByDateRange(team, userStart, userEnd)
-    )
-  );
-
   const processedResults = [];
 
-  for (result of calendarEventResults) {
-    const {
-      config: { costCentre, staff: userStaffConfig, team },
-      events: calendarEvents,
-    } = result;
+  for (const { department, teams } of departments) {
+    const calendarEventResults = await Promise.all(
+      teams.map((team) =>
+        fetchCalendarEventsByDateRange(team, userStart, userEnd)
+      )
+    );
 
-    const processedCalendarEvents = processCalendarEvents({
-      bankHolidays,
-      calendarEvents,
-      costCentre,
-      defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
-      userStaffConfig,
-      team,
-    });
+    for (result of calendarEventResults) {
+      const {
+        config: { costCentre, staff: userStaffConfig, team },
+        events: calendarEvents,
+      } = result;
 
-    processedResults.push({ team, processedCalendarEvents });
+      const processedCalendarEvents = processCalendarEvents({
+        bankHolidays,
+        calendarEvents,
+        costCentre,
+        defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
+        userStaffConfig,
+        team,
+      });
 
-    console.log(processedCalendarEvents);
-    console.log("\n<copy-paste this into Excel>\n");
+      processedResults.push({ department, team, processedCalendarEvents });
 
-    const print = printCSV(processedCalendarEvents, costCentre);
-    console.log(print, "\n");
+      console.log(processedCalendarEvents);
+      console.log("\n<copy-paste this into Excel>\n");
 
-    const sorted = totalRotations(calendarEvents);
-    console.log(sorted, "\n");
+      const print = printCSV(processedCalendarEvents, costCentre);
+      console.log(print, "\n");
 
-    const summary = summariseRotationsByTimesheet(processedCalendarEvents);
-    console.log("Timesheets summary", "\n\n", summary, "\n");
+      const sorted = totalRotations(calendarEvents);
+      console.log(sorted, "\n");
+
+      const summary = summariseRotationsByTimesheet(processedCalendarEvents);
+      console.log("Timesheets summary", "\n\n", summary, "\n");
+    }
   }
 
+  
   inquirer
     .prompt([
       {
-        type: 'list',
-        name: 'response',
-        message: 'Save timesheets?',
-        choices: ['yes', 'no'],
+        type: "list",
+        name: "response",
+        message: "Save timesheets?",
+        choices: ["yes", "no"],
       },
     ])
     .then((answers) => {
       if (answers.response === "yes") {
-        processedResults.forEach(({ team, processedCalendarEvents }) => {
-          writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team);
-        });
+        promptClearDir();
       } else {
-        console.log('bye!')
+        console.log("bye!");
       }
     });
+
+    function promptClearDir() {
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "response",
+            message: "Clear files?",
+            choices: ["yes", "no"],
+          },
+        ])
+        .then((answers) => {
+          if (answers.response === "yes") {
+            clearExistingTimesheets(TIMESHEETS_DIR);
+          }
+
+          writeFiles(processedResults);
+        });
+    }
+  
 }
 
 module.exports = { main };
+
+function writeFiles(processedResults) {
+  processedResults.forEach(
+    ({ department, team, processedCalendarEvents }) => {
+      writeTimesheet(
+        TIMESHEETS_DIR,
+        processedCalendarEvents,
+        team,
+        department
+      );
+    }
+  );
+}
+
+function clearExistingTimesheets(dir) {
+  const fs = require("fs");
+  const path = require("path");
+
+  fs.readdir(dir, (err, files) => {
+    if (err)
+      throw err;
+
+    for (const file of files) {
+      fs.unlink(path.join(dir, file), (err) => {
+        if (err)
+          throw err;
+      });
+    }
+  });
+}
+
