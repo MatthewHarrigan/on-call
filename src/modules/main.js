@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-
+const Excel = require("exceljs");
 // const https = require("https");
 
 const { newAgent } = require("../httpClient/agents");
@@ -24,6 +24,8 @@ const {
   totalRotations,
   addDateRangeToCalendarUrl,
 } = require("./utils");
+
+const { writeTimesheet } = require("./spreadsheet");
 
 const DEFAULT_PAYDAY_OF_MONTH = 15;
 const { processCalendarEvents } = require("./processCalendarEvents");
@@ -79,25 +81,32 @@ async function main() {
     )
   );
 
-  calendarEventResults.forEach(({ config: { costCentre, staff }, events }) => {
+  for (result of calendarEventResults) {
+    const {
+      config: { costCentre, staff: userStaffConfig },
+      events: calendarEvents,
+    } = result;
+
     const processedCalendarEvents = processCalendarEvents({
       bankHolidays,
-      calendarEvents: events,
+      calendarEvents,
       costCentre,
       defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
-      userStaffConfig: staff,
+      userStaffConfig,
     });
     console.log("\n<copy-paste this into Excel>\n");
 
     const print = printCSV(processedCalendarEvents, costCentre);
     console.log(print, "\n");
 
-    const sorted = totalRotations(events);
+    const sorted = totalRotations(calendarEvents);
     console.log(sorted, "\n");
 
     const summary = summariseRotationsByTimesheet(processedCalendarEvents);
     console.log("Timesheets summary", "\n\n", summary, "\n");
-  });
+
+    await writeTimesheet(processedCalendarEvents);
+  }
 }
 
 module.exports = { main };
