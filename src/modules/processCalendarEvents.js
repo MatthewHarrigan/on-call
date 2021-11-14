@@ -37,6 +37,7 @@ const processCalendarEvents = ({
   userStaffConfig,
   costCentre,
   defaultPayDay,
+  team
 }) =>
   calendarEvents.map(
     ({ invitees: [{ displayName: eventStaffName }], start, end }) => {
@@ -104,6 +105,7 @@ const processCalendarEvents = ({
         weekdays,
         weekends,
         bankHols,
+        team
       };
     }
   );

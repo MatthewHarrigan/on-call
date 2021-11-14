@@ -1,23 +1,18 @@
 const fetch = require("node-fetch");
-const Excel = require("exceljs");
-// const https = require("https");
-
-const TIMESHEETS_DIR = 'timesheets'
 
 const { newAgent } = require("../httpClient/agents");
 
-const agentConfig = {
-  // ca: "/etc/pki/cloud-ca.pem",
-  ca: "/etc/pki/tls/certs/ca-bundle.crt",
-  cert: "/etc/pki/tls/certs/client.crt",
-  key: "/etc/pki/tls/private/client.key",
-};
-
 const requestOptions = {
-  agent: newAgent("https", agentConfig),
+  agent: newAgent("https", {
+    ca: "/etc/pki/tls/certs/ca-bundle.crt",
+    cert: "/etc/pki/tls/certs/client.crt",
+    key: "/etc/pki/tls/private/client.key",
+  }),
   method: "GET",
 };
 
+const TIMESHEETS_DIR = "timesheets";
+const DEFAULT_PAYDAY_OF_MONTH = 15;
 const { teams } = require("../config/.config.json");
 
 const {
@@ -27,13 +22,11 @@ const {
   addDateRangeToCalendarUrl,
 } = require("./utils");
 
-const { writeTimesheet } = require("./spreadsheet");
-
-const DEFAULT_PAYDAY_OF_MONTH = 15;
 const { processCalendarEvents } = require("./processCalendarEvents");
 
-const inquirer = require("inquirer");
+const { writeTimesheet } = require("./spreadsheet");
 
+const inquirer = require("inquirer");
 inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
 
 const lastMonth = new Date();
@@ -83,18 +76,26 @@ async function main() {
     )
   );
 
+  const processedResults = [];
+
   for (result of calendarEventResults) {
     const {
       config: { costCentre, staff: userStaffConfig, team },
       events: calendarEvents,
     } = result;
+
     const processedCalendarEvents = processCalendarEvents({
       bankHolidays,
       calendarEvents,
       costCentre,
       defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
       userStaffConfig,
+      team,
     });
+
+    processedResults.push({ team, processedCalendarEvents });
+
+    console.log(processedCalendarEvents);
     console.log("\n<copy-paste this into Excel>\n");
 
     const print = printCSV(processedCalendarEvents, costCentre);
@@ -105,9 +106,26 @@ async function main() {
 
     const summary = summariseRotationsByTimesheet(processedCalendarEvents);
     console.log("Timesheets summary", "\n\n", summary, "\n");
-
-    await writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team);
   }
+
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'response',
+        message: 'Save timesheets?',
+        choices: ['yes', 'no'],
+      },
+    ])
+    .then((answers) => {
+      if (answers.response === "yes") {
+        processedResults.forEach(({ team, processedCalendarEvents }) => {
+          writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team);
+        });
+      } else {
+        console.log('bye!')
+      }
+    });
 }
 
 module.exports = { main };

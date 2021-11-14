@@ -44,7 +44,10 @@ async function writeTimesheet(dir, processedCalendarEvents, team) {
       newworksheet.insertRow(index + 16, rowValues, "o+");
     });
 
-    await newWorkbook.xlsx.writeFile(`./${dir}/${team}-${title}.xlsx`);
+    const file = `./${dir}/${team}-${title}.xlsx`;
+    await newWorkbook.xlsx.writeFile(file);
+
+    console.log(`${file}`)
   }
 }
 
