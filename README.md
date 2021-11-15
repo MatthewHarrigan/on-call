@@ -1,6 +1,11 @@
-# Generate On-call timesheet csv
+# Generate on-call timesheets
 
-Reads Confluence team calendar via the Confluence API and outputs CSV to copypaste into timesheet
+Small CLI tool to generate on-call timesheets, calculate stats etc.
+
+- Specify date range
+- Generates .xlsx timesheets including bankholidays
+- Summarises rota counts etc.
+- Works with multiple calendars, teams, departments etc.
 
 ## Setup confluence calendar
 
@@ -38,37 +43,40 @@ The config.json will contain values for your team: staff, charge code and Conflu
 
 ```json
 {
-  "teams": [
+  "departments": [
     {
-      "team": "<team name>",
-      "staff": [
+      "department": "<dept name",
+      "teams": [
         {
-            "displayName" : "<staff user id as displayed in the calendar>",
-            "number" : "<staff id>",
-            "division" : "<country(s) from https://www.gov.uk/bank-holidays.json>"
-        }
-    ],
-      "calendarPage": "https://confluence/pages/viewpage.action?pageId=12345678",
-      "costCentre": "<your team's charge code>",
-      "teamCalendarAPI": "<jira calendar url>"
-    },
-    {
-      "team": "<team name>",
-      "staff": [
+          "team": "<team name>",
+          "staff": [
+            {
+              "displayName": "<staff user id as displayed in the calendar>",
+              "number": "<staff id>",
+              "division": "<country(s) from https://www.gov.uk/bank-holidays.json>"
+            }
+          ],
+          "calendarPage": "https://confluence/pages/viewpage.action?pageId=12345678",
+          "costCentre": "<your team's charge code>",
+          "teamCalendarAPI": "<jira calendar url>"
+        },
         {
-            "displayName" : "<staff user id as displayed in the calendar>",
-            "number" : "<staff id>",
-            "division" : "<country(s) from https://www.gov.uk/bank-holidays.json>"
+          "team": "<team name>",
+          "staff": [
+            {
+              "displayName": "<staff user id as displayed in the calendar>",
+              "number": "<staff id>",
+              "division": "<country(s) from https://www.gov.uk/bank-holidays.json>"
+            }
+          ],
+          "calendarPage": "https://confluence/pages/viewpage.action?pageId=12345678",
+          "costCentre": "<your team's charge code>",
+          "teamCalendarAPI": "<jira calendar url>"
         }
-    ],
-      "calendarPage": "https://confluence/pages/viewpage.action?pageId=12345678",
-      "costCentre": "<your team's charge code>",
-      "teamCalendarAPI": "<jira calendar url>"
+      ]
     }
   ]
 }
-
-
 ```
 
 ## Run
@@ -82,3 +90,5 @@ node index.js
 Copy and paste the csv into the Summary Timesheet. You may need to copy and paste into the excel and then use the Data > Text to Columns option.
 
 Alternatively Paste Special (^⌘v) and select "As: Text"
+
+Or use the generated sheets
