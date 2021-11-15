@@ -6,23 +6,13 @@ const {
 
 const { bankHolidays } = require("./mockBankHolidaysResponse.js");
 
-// departments: [
-//   {
-//     department,
-//     teams: [{ staff, costCentre }],
-//   }
-// ],
-
-// },
-
 const {
   mockConfig: {
-    departments: [{department, teams}],
+    departments:[
+      {teams: [{ team, staff, costCentre }]},
+    ]
   },
 } = require("./mockConfig");
-
-
-const { staff, costCentre } = teams;
 
 const { mockProcessedEvents } = require("./mockProcessedEvents");
 
