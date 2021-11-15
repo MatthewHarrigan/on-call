@@ -19,7 +19,7 @@ const {
   },
 } = require("./mockConfig");
 
-const DEFAULT_PAYDAY_OF_MONTH = 15;
+const DEFAULT_TIMESHEET_SUBMISSION_CUTOFF = 15;
 
 describe("totalRotations", () => {
   test("it prints totals", () => {
@@ -43,7 +43,7 @@ describe("summariseRotationsByTimesheet", () => {
         bankHolidays,
         calendarEvents: events,
         costCentre,
-        defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
+        defaultsubmissionCutOff: DEFAULT_TIMESHEET_SUBMISSION_CUTOFF,
         userStaffConfig: staff,
       }
     );
@@ -51,40 +51,40 @@ describe("summariseRotationsByTimesheet", () => {
     const summary = summariseRotationsByTimesheet(processedCalendarEvents);
 
     const expected = {
-      "Mar-Apr": {
+      "Mar-2021 Apr-2021": {
         "Todd Bonzalez": 1,
         "Bobson Dugnutt": 1,
         "Willie Dustice": 1,
         "Dorse O Hintline": 1,
       },
-      "Apr-May": {
+      "Apr-2021 May-2021": {
         "Todd Bonzalez": 2,
         "Bobson Dugnutt": 1,
         "Willie Dustice": 1,
         "Dorse O Hintline": 1,
       },
-      "May-Jun": {
+      "May-2021 Jun-2021": {
         "Willie Dustice": 2,
         "Bobson Dugnutt": 1,
         "Dorse O Hintline": 1,
       },
-      "Jun-Jul": {
+      "Jun-2021 Jul-2021": {
         "Todd Bonzalez": 2,
         "Bobson Dugnutt": 1,
         "Willie Dustice": 1,
         "Dorse O Hintline": 1,
       },
-      "Jul-Aug": {
+      "Jul-2021 Aug-2021": {
         "Bobson Dugnutt": 2,
         "Willie Dustice": 1,
         "Dorse O Hintline": 1,
       },
-      "Aug-Sept": {
+      "Aug-2021 Sept-2021": {
         "Willie Dustice": 1,
         "Dorse O Hintline": 2,
         "Bobson Dugnutt": 2,
       },
-      "Sept-Oct": { "Willie Dustice": 2, "Dorse O Hintline": 1 },
+      "Sept-2021 Oct-2021": { "Willie Dustice": 2, "Dorse O Hintline": 1 },
     };
     expect(summary).toEqual(expected);
   });
@@ -97,7 +97,7 @@ describe("printCSV", () => {
         bankHolidays,
         calendarEvents: events,
         costCentre,
-        defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
+        defaultsubmissionCutOff: DEFAULT_TIMESHEET_SUBMISSION_CUTOFF,
         userStaffConfig: staff,
       }
     );

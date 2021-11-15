@@ -12,7 +12,9 @@ const requestOptions = {
 };
 
 const TIMESHEETS_DIR = "timesheets";
-const DEFAULT_PAYDAY_OF_MONTH = 15;
+// should this actually be the timesheet cut of of the previous month? e.g. 20th?
+// Steve Marchant "I would suggest only submitting and paying for what will have happened retrospectively (up to payday), just in case things then change.""
+const DEFAULT_TIMESHEET_SUBMISSION_CUTOFF = 15; // Payday
 const { departments } = require("../config/config.json");
 
 const {
@@ -59,6 +61,7 @@ async function fetchCalendarEventsByDateRange(
     end,
     teamCalendarAPI
   );
+
   const response = await fetch(urlWithUserEndDate, requestOptions);
   const { events } = await response.json();
   return { config, events };
@@ -89,14 +92,13 @@ async function main() {
         bankHolidays,
         calendarEvents,
         costCentre,
-        defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
+        defaultsubmissionCutOff: DEFAULT_TIMESHEET_SUBMISSION_CUTOFF,
         userStaffConfig,
         team,
       });
 
       processedResults.push({ department, team, processedCalendarEvents });
 
-      console.log(processedCalendarEvents);
       console.log("\n<copy-paste this into Excel>\n");
 
       const print = printCSV(processedCalendarEvents, costCentre);
@@ -110,7 +112,6 @@ async function main() {
     }
   }
 
-  
   inquirer
     .prompt([
       {
@@ -128,40 +129,36 @@ async function main() {
       }
     });
 
-    function promptClearDir() {
-      inquirer
-        .prompt([
-          {
-            type: "list",
-            name: "response",
-            message: "Clear files?",
-            choices: ["yes", "no"],
-          },
-        ])
-        .then((answers) => {
-          if (answers.response === "yes") {
-            clearExistingTimesheets(TIMESHEETS_DIR);
-          }
+  function promptClearDir() {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "response",
+          message: "Clear files?",
+          choices: ["yes", "no"],
+        },
+      ])
+      .then((answers) => {
+        if (answers.response === "yes") {
+          clearExistingTimesheets(TIMESHEETS_DIR);
+        }
 
-          writeFiles(processedResults);
-        });
-    }
-  
+        writeFiles(processedResults);
+      });
+  }
 }
 
 module.exports = { main };
 
 function writeFiles(processedResults) {
-  processedResults.forEach(
-    ({ department, team, processedCalendarEvents }) => {
-      writeTimesheet(
-        TIMESHEETS_DIR,
-        processedCalendarEvents,
-        team,
-        department
-      );
-    }
-  );
+  for (const {
+    department,
+    team,
+    processedCalendarEvents,
+  } of processedResults) {
+    writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team, department);
+  }
 }
 
 function clearExistingTimesheets(dir) {
@@ -169,15 +166,12 @@ function clearExistingTimesheets(dir) {
   const path = require("path");
 
   fs.readdir(dir, (err, files) => {
-    if (err)
-      throw err;
+    if (err) throw err;
 
     for (const file of files) {
       fs.unlink(path.join(dir, file), (err) => {
-        if (err)
-          throw err;
+        if (err) throw err;
       });
     }
   });
 }
-

@@ -7,6 +7,7 @@ function eachDayOfInterval(s, e) {
   while (current <= end) {
     result.push(new Date(current));
     current.setDate(current.getDate() + 1);
+    current.setHours(0,0,0,0);
   }
   return result;
 }
@@ -35,7 +36,7 @@ const processCalendarEvents = ({
   bankHolidays,
   userStaffConfig,
   costCentre,
-  defaultPayDay,
+  defaultsubmissionCutOff,
   team,
 }) =>
   calendarEvents.map(
@@ -53,6 +54,7 @@ const processCalendarEvents = ({
 
       // TODO work out what the start and end dates actually are
       const eachDay = eachDayOfInterval(start, end);
+      
 
       const weekends = eachDay.filter(isWeekend).length;
       const weekdays = eachDay.length - weekends;
@@ -73,10 +75,10 @@ const processCalendarEvents = ({
         .join(" ");
 
       const d = new Date(start);
-      d.setDate(defaultPayDay);
-      const payDay = isWeekend(d) ? previousFriday(d) : d;
+      d.setDate(defaultsubmissionCutOff);
+      const submissionCutOff = isWeekend(d) ? previousFriday(d) : d;
 
-      const nextMonth = new Date(payDay);
+      const nextMonth = new Date(submissionCutOff);
       nextMonth.setMonth(nextMonth.getMonth() + 1);
       const nextMonthFormatted = new Intl.DateTimeFormat("en-GB", {
         month: "short",
@@ -92,13 +94,13 @@ const processCalendarEvents = ({
         month: "short",
         year: "numeric",
       })
-        .formatToParts(payDay)
+        .formatToParts(submissionCutOff)
         .map(({ value }) => {
           return value === " " ? "-" : value;
         })
         .join("");
 
-      const previousMonth = new Date(payDay);
+      const previousMonth = new Date(submissionCutOff);
       previousMonth.setMonth(previousMonth.getMonth() - 1);
       const previousMonthFormatted = new Intl.DateTimeFormat("en-GB", {
         month: "short",
@@ -110,11 +112,11 @@ const processCalendarEvents = ({
         })
         .join("");
 
-      // If start date is before payDay put in that month's timesheet here
-      // but if the period is mostly past payDay I'll sometimes discretionally bump to next month manually
+      // If start date is before submissionCutOff put in that month's timesheet here
+      // but if the period is mostly past submissionCutOff I'll sometimes discretionally bump to next month manually
 
       const timesheetTitle =
-        new Date(start) < payDay && new Date(end) < payDay
+        new Date(start) < submissionCutOff && new Date(end) < submissionCutOff
           ? `${previousMonthFormatted} ${currentMonthFormatted}`
           : `${currentMonthFormatted} ${nextMonthFormatted}`;
 
