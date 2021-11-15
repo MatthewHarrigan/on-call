@@ -8,13 +8,15 @@ const { bankHolidays } = require("./mockBankHolidaysResponse.js");
 
 const {
   mockConfig: {
-    teams: [{ staff, costCentre }],
+    departments:[
+      {teams: [{ team, staff, costCentre }]},
+    ]
   },
 } = require("./mockConfig");
 
 const { mockProcessedEvents } = require("./mockProcessedEvents");
 
-const DEFAULT_PAYDAY_OF_MONTH = 15;
+const DEFAULT_TIMESHEET_SUBMISSION_CUTOFF = 15;
 
 describe("processCalendarEvents", () => {
   test("it processes calendar events", () => {
@@ -22,7 +24,7 @@ describe("processCalendarEvents", () => {
       bankHolidays,
       calendarEvents: events,
       costCentre,
-      defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
+      defaultsubmissionCutOff: DEFAULT_TIMESHEET_SUBMISSION_CUTOFF,
       userStaffConfig: staff,
     });
 
@@ -39,7 +41,7 @@ describe("processCalendarEvents", () => {
         bankHolidays,
         calendarEvents: events,
         costCentre,
-        defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
+        defaultsubmissionCutOff: DEFAULT_TIMESHEET_SUBMISSION_CUTOFF,
         userStaffConfig: staff,
       });
     }).toThrow(

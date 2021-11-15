@@ -1,22 +1,21 @@
 const fetch = require("node-fetch");
 
-// const https = require("https");
-
 const { newAgent } = require("../httpClient/agents");
 
-const agentConfig = {
-  // ca: "/etc/pki/cloud-ca.pem",
-  ca: "/etc/pki/tls/certs/ca-bundle.crt",
-  cert: "/etc/pki/tls/certs/client.crt",
-  key: "/etc/pki/tls/private/client.key",
-};
-
 const requestOptions = {
-  agent: newAgent("https", agentConfig),
+  agent: newAgent("https", {
+    ca: "/etc/pki/tls/certs/ca-bundle.crt",
+    cert: "/etc/pki/tls/certs/client.crt",
+    key: "/etc/pki/tls/private/client.key",
+  }),
   method: "GET",
 };
 
-const { teams } = require("../config/config.json");
+const TIMESHEETS_DIR = "timesheets";
+// should this actually be the timesheet cut of of the previous month? e.g. 20th?
+// Steve Marchant "I would suggest only submitting and paying for what will have happened retrospectively (up to payday), just in case things then change.""
+const DEFAULT_TIMESHEET_SUBMISSION_CUTOFF = 15; // Payday
+const { departments } = require("../config/config.json");
 
 const {
   printCSV,
@@ -25,11 +24,11 @@ const {
   addDateRangeToCalendarUrl,
 } = require("./utils");
 
-const DEFAULT_PAYDAY_OF_MONTH = 15;
 const { processCalendarEvents } = require("./processCalendarEvents");
 
-const inquirer = require("inquirer");
+const { writeTimesheet } = require("./spreadsheet");
 
+const inquirer = require("inquirer");
 inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
 
 const lastMonth = new Date();
@@ -62,6 +61,7 @@ async function fetchCalendarEventsByDateRange(
     end,
     teamCalendarAPI
   );
+
   const response = await fetch(urlWithUserEndDate, requestOptions);
   const { events } = await response.json();
   return { config, events };
@@ -73,31 +73,105 @@ async function main() {
   const fetchBankhols = await fetch("https://www.gov.uk/bank-holidays.json");
   const bankHolidays = await fetchBankhols.json();
 
-  const calendarEventResults = await Promise.all(
-    teams.map((team) =>
-      fetchCalendarEventsByDateRange(team, userStart, userEnd)
-    )
-  );
+  const processedResults = [];
 
-  calendarEventResults.forEach(({ config: { costCentre, staff }, events }) => {
-    const processedCalendarEvents = processCalendarEvents({
-      bankHolidays,
-      calendarEvents: events,
-      costCentre,
-      defaultPayDay: DEFAULT_PAYDAY_OF_MONTH,
-      userStaffConfig: staff,
+  for (const { department, teams } of departments) {
+    const calendarEventResults = await Promise.all(
+      teams.map((team) =>
+        fetchCalendarEventsByDateRange(team, userStart, userEnd)
+      )
+    );
+
+    for (result of calendarEventResults) {
+      const {
+        config: { costCentre, staff: userStaffConfig, team },
+        events: calendarEvents,
+      } = result;
+
+      const processedCalendarEvents = processCalendarEvents({
+        bankHolidays,
+        calendarEvents,
+        costCentre,
+        defaultsubmissionCutOff: DEFAULT_TIMESHEET_SUBMISSION_CUTOFF,
+        userStaffConfig,
+        team,
+      });
+
+      processedResults.push({ department, team, processedCalendarEvents });
+
+      console.log("\n<copy-paste this into Excel>\n");
+
+      const print = printCSV(processedCalendarEvents, costCentre);
+      console.log(print, "\n");
+
+      const sorted = totalRotations(calendarEvents);
+      console.log(sorted, "\n");
+
+      const summary = summariseRotationsByTimesheet(processedCalendarEvents);
+      console.log("Timesheets summary", "\n\n", summary, "\n");
+    }
+  }
+
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "response",
+        message: "Save timesheets?",
+        choices: ["yes", "no"],
+      },
+    ])
+    .then((answers) => {
+      if (answers.response === "yes") {
+        promptClearDir();
+      } else {
+        console.log("bye!");
+      }
     });
-    console.log("\n<copy-paste this into Excel>\n");
 
-    const print = printCSV(processedCalendarEvents, costCentre);
-    console.log(print, "\n");
+  function promptClearDir() {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "response",
+          message: "Clear files?",
+          choices: ["yes", "no"],
+        },
+      ])
+      .then((answers) => {
+        if (answers.response === "yes") {
+          clearExistingTimesheets(TIMESHEETS_DIR);
+        }
 
-    const sorted = totalRotations(events);
-    console.log(sorted, "\n");
-
-    const summary = summariseRotationsByTimesheet(processedCalendarEvents);
-    console.log("Timesheets summary", "\n\n", summary, "\n");
-  });
+        writeFiles(processedResults);
+      });
+  }
 }
 
 module.exports = { main };
+
+function writeFiles(processedResults) {
+  for (const {
+    department,
+    team,
+    processedCalendarEvents,
+  } of processedResults) {
+    writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team, department);
+  }
+}
+
+function clearExistingTimesheets(dir) {
+  const fs = require("fs");
+  const path = require("path");
+
+  fs.readdir(dir, (err, files) => {
+    if (err) throw err;
+
+    for (const file of files) {
+      fs.unlink(path.join(dir, file), (err) => {
+        if (err) throw err;
+      });
+    }
+  });
+}

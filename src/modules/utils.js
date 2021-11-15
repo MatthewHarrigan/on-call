@@ -1,10 +1,10 @@
-function printCSV(processedCalendarEvents, costCentre) {
+function printCSV(processedCalendarEvents) {
   return processedCalendarEvents
-    .map(({staffNumber, name, weekdays, weekends, bankHols, start, end}) =>
+    .map(({staffNumber, name, cost, weekdays, weekends, bankHols, start, end}) =>
       [
         staffNumber,
         name,
-        costCentre,
+        cost,
         `On-Call: ${new Date(start).toLocaleString().split(',')[0]} - ${new Date(end).toLocaleString().split(',')[0]}`,
         "",
         "",
