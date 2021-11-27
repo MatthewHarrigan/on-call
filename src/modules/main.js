@@ -16,6 +16,8 @@ const BANKHOLIDAYS_URL = "https://www.gov.uk/bank-holidays.json";
 const TIMESHEETS_DIR = "timesheets";
 // Submit and payfor that has happened retrospectively (up to payday)
 const DEFAULT_TIMESHEET_SUBMISSION_CUTOFF = 15;
+const CONFIG_EXAMPLE_FILE = "config.example.json";
+const CONFIG_DIR = "src/config/";
 
 const {
   addDateRangeToCalendarUrl,
@@ -37,8 +39,8 @@ lastMonth.setMonth(lastMonth.getMonth() - 1);
 
 async function main() {
   try {
-    const files = await readdir("src/config/");
-    const filterFiles = files.filter((item) => item !== "config.example.json");
+    const files = await readdir(CONFIG_DIR);
+    const filterFiles = files.filter((item) => item !== CONFIG_EXAMPLE_FILE);
 
     if (filterFiles.length === 0) {
       throw new Error("No config files found");
