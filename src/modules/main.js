@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const { readdir } = require("fs/promises");
 
 const { newAgent } = require("../httpClient/agents");
 
@@ -35,8 +36,6 @@ const lastMonth = new Date();
 lastMonth.setMonth(lastMonth.getMonth() - 1);
 
 async function main() {
-  const { readdir } = require("fs/promises");
-
   try {
     const files = await readdir("src/config/");
     const filterFiles = files.filter((item) => item !== "config.example.json");
@@ -104,23 +103,20 @@ async function main() {
       }
     }
 
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          name: "response",
-          message: "Save timesheets?",
-          choices: ["no", "yes"],
-        },
-      ])
-      .then((answers) => {
-        if (answers.response === "yes") {
-          promptClearDir(processedResults);
-        } else {
-          console.log("bye!");
-        }
-      });
-      
+    const { response } = await inquirer.prompt([
+      {
+        type: "list",
+        name: "response",
+        message: "Save timesheets?",
+        choices: ["no", "yes"],
+      },
+    ]);
+
+    if (response === "yes") {
+      promptClearDir(processedResults);
+    } else {
+      console.log("bye!");
+    }
   } catch (err) {
     console.error(err);
   }
