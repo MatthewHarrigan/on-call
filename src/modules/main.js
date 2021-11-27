@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
-const { readdir } = require("fs/promises");
+const { readdir, unlink } = require("fs/promises");
+const path = require("path");
 
 const { newAgent } = require("../httpClient/agents");
 
@@ -167,19 +168,14 @@ function writeFiles(processedResults) {
   }
 }
 
-function clearExistingTimesheets(dir) {
-  const fs = require("fs");
-  const path = require("path");
+async function clearExistingTimesheets(dir) {
+  const files = await readdir(dir);
 
-  fs.readdir(dir, (err, files) => {
-    if (err) throw err;
-
-    for (const file of files) {
-      fs.unlink(path.join(dir, file), (err) => {
-        if (err) throw err;
-      });
-    }
-  });
+  for (const file of files) {
+    await unlink(path.join(dir, file), (err) => {
+      if (err) throw err;
+    });
+  }
 }
 
 async function promptClearDir(processedResults) {
