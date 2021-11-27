@@ -183,7 +183,7 @@ function clearExistingTimesheets(dir) {
 }
 
 function promptClearDir(processedResults) {
-  inquirer
+  const { response } = inquirer
     .prompt([
       {
         type: "list",
@@ -192,13 +192,12 @@ function promptClearDir(processedResults) {
         choices: ["yes", "no"],
       },
     ])
-    .then((answers) => {
-      if (answers.response === "yes") {
-        clearExistingTimesheets(TIMESHEETS_DIR);
-      }
 
-      writeFiles(processedResults);
-    });
+    if (response === "yes") {
+      clearExistingTimesheets(TIMESHEETS_DIR);
+    }
+
+    writeFiles(processedResults);
 }
 
 module.exports = { main };
