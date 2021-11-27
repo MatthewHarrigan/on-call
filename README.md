@@ -10,7 +10,8 @@ Small CLI tool to generate on-call timesheets, calculate stats etc.
 ## Setup confluence calendar
 
 https://www.atlassian.com/software/confluence/team-calendars
-i.e. https://confluence.dev.bbc.co.uk/pages/viewpage.action?pageId=190673180
+
+Expects rotations to be sequential and non-overlapping. If you have multiple people on call at the same time you will probably get some strange results back.
 
 ## Calendar event endpoint
 
@@ -39,7 +40,7 @@ yarn install
 
 ## Create config.json
 
-The config.json will contain values for your team: staff, charge code and Confluence calendar api endpoint. Supports multiple teams and calendars
+The config.json will contain values for your departments, teams, charge code and Confluence calendar api endpoints etc. Supports multiple teams and calendars
 
 ```json
 {
@@ -85,7 +86,7 @@ The config.json will contain values for your team: staff, charge code and Conflu
 node index.js
 ```
 
-## Copy and paste
+## Generate timesheets
 
 Copy and paste the csv into the Summary Timesheet. You may need to copy and paste into the excel and then use the Data > Text to Columns option.
 

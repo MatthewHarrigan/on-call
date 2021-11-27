@@ -35,7 +35,7 @@ inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
 const lastMonth = new Date();
 lastMonth.setMonth(lastMonth.getMonth() - 1);
 
-const questions = [
+const dateRangeQuestions = [
   {
     type: "datetime",
     name: "userStart",
@@ -69,7 +69,8 @@ async function fetchCalendarEventsByDateRange(
 }
 
 async function main() {
-  const { userStart, userEnd } = await inquirer.prompt(questions);
+  
+  const { userStart, userEnd } = await inquirer.prompt(dateRangeQuestions);
 
   const fetchBankhols = await fetch(BANKHOLIDAYS_URL);
   const bankHolidays = await fetchBankhols.json();
