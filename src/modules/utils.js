@@ -28,14 +28,14 @@ function printCSV(processedCalendarEvents) {
 }
 
 function summariseRotationsByTimesheet(processedCalendarEvents) {
-  return processedCalendarEvents.reduce((obj, { timesheet, name }) => {
-    if (!obj[timesheet]) {
-      obj[timesheet] = { [name]: 1 };
+  return processedCalendarEvents.reduce((obj, { timesheetTitle, name }) => {
+    if (!obj[timesheetTitle]) {
+      obj[timesheetTitle] = { [name]: 1 };
     } else {
-      if (!obj[timesheet][name]) {
-        obj[timesheet][name] = 1;
+      if (!obj[timesheetTitle][name]) {
+        obj[timesheetTitle][name] = 1;
       } else {
-        obj[timesheet][name] += 1;
+        obj[timesheetTitle][name] += 1;
       }
     }
 
@@ -44,8 +44,37 @@ function summariseRotationsByTimesheet(processedCalendarEvents) {
 }
 
 function printSummaryTable(processedCalendarEvents) {
-  console.log(processedCalendarEvents)
-  return '<table>';
+  const results = processedCalendarEvents.reduce(
+    (obj, { timesheetTitle, name, paymentMonth, submissionCutOff }) => {
+      if (!obj[paymentMonth]) {
+        const payDay = new Intl.DateTimeFormat("en-GB", {
+          dateStyle: "full",
+        }).format(submissionCutOff);
+
+        obj[paymentMonth] = {
+          paySlip: paymentMonth,
+          rotas: { [name]: 1 },
+          submittedInTimesheet: timesheetTitle,
+        };
+      } else {
+        if (!obj[paymentMonth]["rotas"][name]) {
+          obj[paymentMonth]["rotas"][name] = 1;
+        } else {
+          obj[paymentMonth]["rotas"][name] += 1;
+        }
+      }
+      return obj;
+    },
+    {}
+  );
+
+  const tidyTable = [];
+  for (const result in results) {
+    results[result].rotas = JSON.stringify(results[result].rotas);
+    tidyTable.push(results[result]);
+  }
+
+  console.table(tidyTable);
 }
 
 function totalRotations(processedCalendarEvents) {

@@ -1,13 +1,13 @@
 const Excel = require("exceljs");
 
 async function writeTimesheet(dir, processedCalendarEvents, team, department) {
-  // group events by timesheet e.g. oct-nov
+  // group events by timesheetTitle e.g. oct-nov
   const eventsByTimesheet = processedCalendarEvents.reduce(
-    (obj, { timesheet, ...event }) => {
-      if (!obj[timesheet]) {
-        obj[timesheet] = [event];
+    (obj, { timesheetTitle, ...event }) => {
+      if (!obj[timesheetTitle]) {
+        obj[timesheetTitle] = [event];
       } else {
-        obj[timesheet].push(event);
+        obj[timesheetTitle].push(event);
       }
       return obj;
     },

@@ -25,11 +25,11 @@ function previousFriday(date) {
   const diff = day <= 5 ? 7 - 5 + day : day - 5;
 
   d.setDate(d.getDate() - diff);
-  d.setHours(0);
-  d.setMinutes(0);
-  d.setSeconds(0);
+  // d.setHours(0);
+  // d.setMinutes(0);
+  // d.setSeconds(0);
 
-  return d.getTime();
+  return new Date(d.getTime());
 }
 
 // This maps the days from the confluence calendar and calculates weekends etc
@@ -129,7 +129,7 @@ const processCalendarEvents = ({
         })
         .join("");
 
-      // If start date is before submissionCutOff put in that month's timesheet here
+      // If start date is before submissionCutOff put in that month's timesheetTitle here
       // but if the period is mostly past submissionCutOff I'll sometimes discretionally bump to next month manually
 
       // const timesheetTitle =
@@ -149,14 +149,14 @@ const processCalendarEvents = ({
         paymentMonth = addMonths(nextMonth, 1);
       }
 
-
-      const paymentMonthFormatted = format(paymentMonth, 'MMMM');
+      const paymentMonthFormatted = format(paymentMonth, 'MMMM-yyyy');
 
       return {
         start,
         end,
-        timesheet: timesheetTitle,
+        timesheetTitle,
         paymentMonth: paymentMonthFormatted,
+        submissionCutOff,
         staffNumber,
         name: formatName,
         cost: costCentre,
