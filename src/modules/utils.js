@@ -1,23 +1,59 @@
+function addDateRangeToCalendarUrl(start, end, url) {
+  const startDateWithoutMS = start.toISOString().slice(0, -5) + "Z";
+  const endDateWithoutMS = end.toISOString().slice(0, -5) + "Z";
+  return url
+    .replace(/START/g, encodeURI(startDateWithoutMS))
+    .replace(/END/g, encodeURI(endDateWithoutMS));
+}
+
+function clearExistingTimesheets(dir) {
+  const fs = require("fs");
+  const path = require("path");
+
+  fs.readdir(dir, (err, files) => {
+    if (err) throw err;
+
+    for (const file of files) {
+      fs.unlink(path.join(dir, file), (err) => {
+        if (err) throw err;
+      });
+    }
+  });
+}
+
+function writeFiles(processedResults) {
+  for (const {
+    department,
+    team,
+    processedCalendarEvents,
+  } of processedResults) {
+    writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team, department);
+  }
+}
+
 function printCSV(processedCalendarEvents) {
   return processedCalendarEvents
-    .map(({staffNumber, name, cost, weekdays, weekends, bankHols, start, end}) =>
-      [
-        staffNumber,
-        name,
-        cost,
-        `On-Call: ${new Date(start).toLocaleString().split(',')[0]} - ${new Date(end).toLocaleString().split(',')[0]}`,
-        "",
-        "",
-        weekdays,
-        weekends,
-        bankHols,
-      ].join(",")
+    .map(
+      ({ staffNumber, name, cost, weekdays, weekends, bankHols, start, end }) =>
+        [
+          staffNumber,
+          name,
+          cost,
+          `On-Call: ${new Date(start).toLocaleString().split(",")[0]} - ${
+            new Date(end).toLocaleString().split(",")[0]
+          }`,
+          "",
+          "",
+          weekdays,
+          weekends,
+          bankHols,
+        ].join(",")
     )
     .join("\n");
 }
 
 function summariseRotationsByTimesheet(processedCalendarEvents) {
-  return processedCalendarEvents.reduce((obj, {timesheet, name}) => {
+  return processedCalendarEvents.reduce((obj, { timesheet, name }) => {
     if (!obj[timesheet]) {
       obj[timesheet] = { [name]: 1 };
     } else {
@@ -30,6 +66,11 @@ function summariseRotationsByTimesheet(processedCalendarEvents) {
 
     return obj;
   }, {});
+}
+
+function printSummaryTable(processedCalendarEvents) {
+  console.log(processedCalendarEvents)
+  return '<table>';
 }
 
 function totalRotations(processedCalendarEvents) {
@@ -50,21 +91,12 @@ function totalRotations(processedCalendarEvents) {
   return sorted;
 }
 
-function addDateRangeToCalendarUrl(start, end, url) {
-  const startDateWithoutMS = start.toISOString().slice(0, -5) + "Z";
-  const endDateWithoutMS = end.toISOString().slice(0, -5) + "Z";
-  return url.replace(
-    /START/g,
-    encodeURI(startDateWithoutMS)
-  ).replace(
-    /END/g,
-    encodeURI(endDateWithoutMS)
-  );
-}
-
 module.exports = {
+  addDateRangeToCalendarUrl,
+  clearExistingTimesheets,
   printCSV,
   summariseRotationsByTimesheet,
+  printSummaryTable,
   totalRotations,
-  addDateRangeToCalendarUrl,
+  writeFiles,
 };

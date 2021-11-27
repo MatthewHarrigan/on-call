@@ -1,3 +1,5 @@
+const { addMonths, format } = require('date-fns')
+
 function eachDayOfInterval(s, e) {
   const end = new Date(e);
   let current = new Date(s);
@@ -54,7 +56,6 @@ const processCalendarEvents = ({
 
       // TODO work out what the start and end dates actually are
       const eachDay = eachDayOfInterval(start, end);
-      
 
       const weekends = eachDay.filter(isWeekend).length;
       const weekdays = eachDay.length - weekends;
@@ -90,6 +91,22 @@ const processCalendarEvents = ({
         })
         .join("");
 
+
+      // const paymentMonth = addMonths(new Date(end), 1);
+      // const paymentMonthFormatted = format(paymentMonth, 'MMMM');
+
+      // const paymentMonth = new Date(nextMonth);
+      // // paymentMonth.setMonth(paymentMonth.getMonth() + 2, 0);
+      // // console.log(paymentMonth)
+      // // const paymentMonthFormatted = new Intl.DateTimeFormat("en-GB", {
+      // //   month: "long"
+      // // }).format(paymentMonth);
+
+      // const paymentMonthFormatted = paymentMonth.setMonth(paymentMonth.getMonth() + 1);
+
+
+
+
       const currentMonthFormatted = new Intl.DateTimeFormat("en-GB", {
         month: "short",
         year: "numeric",
@@ -115,15 +132,31 @@ const processCalendarEvents = ({
       // If start date is before submissionCutOff put in that month's timesheet here
       // but if the period is mostly past submissionCutOff I'll sometimes discretionally bump to next month manually
 
-      const timesheetTitle =
-        new Date(start) < submissionCutOff && new Date(end) < submissionCutOff
-          ? `${previousMonthFormatted} ${currentMonthFormatted}`
-          : `${currentMonthFormatted} ${nextMonthFormatted}`;
+      // const timesheetTitle =
+      //   new Date(start) < submissionCutOff && new Date(end) < submissionCutOff
+      //     ? `${previousMonthFormatted} ${currentMonthFormatted}`
+      //     : `${currentMonthFormatted} ${nextMonthFormatted}`;
+
+
+      let timesheetTitle;
+      let paymentMonth;
+
+      if (new Date(start) < submissionCutOff && new Date(end) < submissionCutOff) {
+        timesheetTitle = `${previousMonthFormatted} ${currentMonthFormatted}`;
+        paymentMonth = addMonths(new Date(submissionCutOff), 1);
+      } else {
+        timesheetTitle = `${currentMonthFormatted} ${nextMonthFormatted}`;
+        paymentMonth = addMonths(nextMonth, 1);
+      }
+
+
+      const paymentMonthFormatted = format(paymentMonth, 'MMMM');
 
       return {
         start,
         end,
         timesheet: timesheetTitle,
+        paymentMonth: paymentMonthFormatted,
         staffNumber,
         name: formatName,
         cost: costCentre,

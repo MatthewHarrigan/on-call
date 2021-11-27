@@ -11,17 +11,19 @@ const requestOptions = {
   method: "GET",
 };
 
+const BANKHOLIDAYS_URL = "https://www.gov.uk/bank-holidays.json";
 const TIMESHEETS_DIR = "timesheets";
-// should this actually be the timesheet cut of of the previous month? e.g. 20th?
-// Steve Marchant "I would suggest only submitting and paying for what will have happened retrospectively (up to payday), just in case things then change.""
-const DEFAULT_TIMESHEET_SUBMISSION_CUTOFF = 15; // Payday
+// Submit and payfor that has happened retrospectively (up to payday)
+const DEFAULT_TIMESHEET_SUBMISSION_CUTOFF = 15;
 const { departments } = require("../config/config.json");
 
 const {
+  addDateRangeToCalendarUrl,
   printCSV,
   summariseRotationsByTimesheet,
+  printSummaryTable,
   totalRotations,
-  addDateRangeToCalendarUrl,
+  clearExistingTimesheets,
 } = require("./utils");
 
 const { processCalendarEvents } = require("./processCalendarEvents");
@@ -70,7 +72,7 @@ async function fetchCalendarEventsByDateRange(
 async function main() {
   const { userStart, userEnd } = await inquirer.prompt(questions);
 
-  const fetchBankhols = await fetch("https://www.gov.uk/bank-holidays.json");
+  const fetchBankhols = await fetch(BANKHOLIDAYS_URL);
   const bankHolidays = await fetchBankhols.json();
 
   const processedResults = [];
@@ -109,6 +111,9 @@ async function main() {
 
       const summary = summariseRotationsByTimesheet(processedCalendarEvents);
       console.log("Timesheets summary", "\n\n", summary, "\n");
+
+      console.log("Print a nice table");
+      console.log(printSummaryTable(processedCalendarEvents));
     }
   }
 
@@ -118,7 +123,7 @@ async function main() {
         type: "list",
         name: "response",
         message: "Save timesheets?",
-        choices: ["yes", "no"],
+        choices: ["no", "yes"],
       },
     ])
     .then((answers) => {
@@ -144,34 +149,9 @@ async function main() {
           clearExistingTimesheets(TIMESHEETS_DIR);
         }
 
-        writeFiles(processedResults);
+        writeTimesheet(processedResults);
       });
   }
 }
 
 module.exports = { main };
-
-function writeFiles(processedResults) {
-  for (const {
-    department,
-    team,
-    processedCalendarEvents,
-  } of processedResults) {
-    writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team, department);
-  }
-}
-
-function clearExistingTimesheets(dir) {
-  const fs = require("fs");
-  const path = require("path");
-
-  fs.readdir(dir, (err, files) => {
-    if (err) throw err;
-
-    for (const file of files) {
-      fs.unlink(path.join(dir, file), (err) => {
-        if (err) throw err;
-      });
-    }
-  });
-}
