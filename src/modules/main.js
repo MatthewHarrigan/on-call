@@ -15,7 +15,6 @@ const BANKHOLIDAYS_URL = "https://www.gov.uk/bank-holidays.json";
 const TIMESHEETS_DIR = "timesheets";
 // Submit and payfor that has happened retrospectively (up to payday)
 const DEFAULT_TIMESHEET_SUBMISSION_CUTOFF = 15;
-const { departments } = require("../config/config.json");
 
 const {
   addDateRangeToCalendarUrl,
@@ -36,6 +35,12 @@ const lastMonth = new Date();
 lastMonth.setMonth(lastMonth.getMonth() - 1);
 
 async function main() {
+  const { departments } = require("../config/config.json");
+
+
+
+
+
   const { userStart, userEnd } = await inquirer.prompt(dateRangeQuestions);
 
   const fetchBankhols = await fetch(BANKHOLIDAYS_URL);
