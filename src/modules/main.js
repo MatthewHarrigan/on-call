@@ -35,14 +35,27 @@ const lastMonth = new Date();
 lastMonth.setMonth(lastMonth.getMonth() - 1);
 
 async function main() {
-  const { departments } = require("../config/config.json");
-
   const { readdir } = require("fs/promises");
 
   try {
     const files = await readdir("src/config/");
     const filterFiles = files.filter((item) => item !== "config.example.json");
-    console.log(filterFiles);
+
+    if (filterFiles.length === 0) {
+      throw new Error("No config files found");
+    }
+
+    const { config } =
+      filterFiles.length > 1
+        ? await inquirer.prompt({
+            type: "list",
+            name: "config",
+            message: "Choose a config file",
+            choices: filterFiles,
+          })
+        : { config: filterFiles[0] };
+
+    const { departments } = require(`../config/${config}`);
 
     const { userStart, userEnd } = await inquirer.prompt(dateRangeQuestions);
 
@@ -107,6 +120,7 @@ async function main() {
           console.log("bye!");
         }
       });
+      
   } catch (err) {
     console.error(err);
   }
