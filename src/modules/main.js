@@ -35,11 +35,23 @@ const lastMonth = new Date();
 lastMonth.setMonth(lastMonth.getMonth() - 1);
 
 async function main() {
-  const { departments } = require("../config/config.json");
+  // const { departments } = require("../config/config.json");
 
 
 
+  const { readdir } = require("fs/promises");
 
+  try {
+    const files = await readdir("src/config/");
+    const filterFiles = files.filter(item => item !== "config.example.json");
+    console.log(filterFiles)
+
+  } catch (err) {
+    console.error(err);
+  }
+
+
+return ;
 
   const { userStart, userEnd } = await inquirer.prompt(dateRangeQuestions);
 
