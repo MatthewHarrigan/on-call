@@ -1,6 +1,5 @@
 const fetch = require("node-fetch");
-const { readdir, unlink } = require("fs/promises");
-const path = require("path");
+const { readdir } = require("fs/promises");
 
 const { newAgent } = require("../httpClient/agents");
 
@@ -30,13 +29,10 @@ const {
 
 const { processCalendarEvents } = require("./processCalendarEvents");
 
-const { writeTimesheet } = require("./spreadsheet");
+const { clearExistingTimesheets, writeTimesheet } = require("./spreadsheet");
 
 const inquirer = require("inquirer");
 inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
-
-const lastMonth = new Date();
-lastMonth.setMonth(lastMonth.getMonth() - 1);
 
 async function main() {
   try {
@@ -59,7 +55,25 @@ async function main() {
 
     const { departments } = require(`../config/${config}`);
 
-    const { userStart, userEnd } = await inquirer.prompt(dateRangeQuestions);
+    const lastMonth = new Date();
+    lastMonth.setMonth(lastMonth.getMonth() - 1);
+
+    const { userStart, userEnd } = await inquirer.prompt([
+      {
+        type: "datetime",
+        name: "userStart",
+        message: "Start date",
+        initial: lastMonth,
+        format: ["d", "/", "m", "/", "yyyy"],
+      },
+      {
+        type: "datetime",
+        name: "userEnd",
+        message: "End date",
+        initial: new Date(),
+        format: ["d", "/", "m", "/", "yyyy"],
+      },
+    ]);
 
     const fetchBankhols = await fetch(BANKHOLIDAYS_URL);
     const bankHolidays = await fetchBankhols.json();
@@ -116,7 +130,7 @@ async function main() {
     ]);
 
     if (response === "yes") {
-      promptClearDir(processedResults);
+      await writeFiles(processedResults);
     } else {
       console.log("bye!");
     }
@@ -124,23 +138,6 @@ async function main() {
     console.error(err);
   }
 }
-
-const dateRangeQuestions = [
-  {
-    type: "datetime",
-    name: "userStart",
-    message: "Start date",
-    initial: lastMonth,
-    format: ["d", "/", "m", "/", "yyyy"],
-  },
-  {
-    type: "datetime",
-    name: "userEnd",
-    message: "End date",
-    initial: new Date(),
-    format: ["d", "/", "m", "/", "yyyy"],
-  },
-];
 
 async function fetchCalendarEventsByDateRange(
   { teamCalendarAPI, ...config },
@@ -158,27 +155,7 @@ async function fetchCalendarEventsByDateRange(
   return { config, events };
 }
 
-function writeFiles(processedResults) {
-  for (const {
-    department,
-    team,
-    processedCalendarEvents,
-  } of processedResults) {
-    writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team, department);
-  }
-}
-
-async function clearExistingTimesheets(dir) {
-  const files = await readdir(dir);
-
-  for (const file of files) {
-    await unlink(path.join(dir, file), (err) => {
-      if (err) throw err;
-    });
-  }
-}
-
-async function promptClearDir(processedResults) {
+async function writeFiles(processedResults) {
   const { response } = await inquirer.prompt([
     {
       type: "list",
@@ -192,7 +169,13 @@ async function promptClearDir(processedResults) {
     clearExistingTimesheets(TIMESHEETS_DIR);
   }
 
-  writeFiles(processedResults);
+  for (const {
+    department,
+    team,
+    processedCalendarEvents,
+  } of processedResults) {
+    writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team, department);
+  }
 }
 
 module.exports = { main };

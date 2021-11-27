@@ -1,4 +1,6 @@
 const Excel = require("exceljs");
+const path = require("path");
+const { readdir, unlink } = require("fs/promises");
 
 async function writeTimesheet(dir, processedCalendarEvents, team, department) {
   // group events by timesheetTitle e.g. oct-nov
@@ -51,4 +53,14 @@ async function writeTimesheet(dir, processedCalendarEvents, team, department) {
   }
 }
 
-module.exports = { writeTimesheet };
+async function clearExistingTimesheets(dir) {
+  const files = await readdir(dir);
+
+  for (const file of files) {
+    await unlink(path.join(dir, file), (err) => {
+      if (err) throw err;
+    });
+  }
+}
+
+module.exports = { clearExistingTimesheets, writeTimesheet };
