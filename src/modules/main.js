@@ -36,22 +36,22 @@ inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
 
 async function main() {
   try {
-    const files = await readdir(CONFIG_DIR);
-    const filterFiles = files.filter((item) => item !== CONFIG_EXAMPLE_FILE);
+    const configFiles = await readdir(CONFIG_DIR);
+    const filterConfigFiles = configFiles.filter((item) => item !== CONFIG_EXAMPLE_FILE);
 
-    if (filterFiles.length === 0) {
+    if (filterConfigFiles.length === 0) {
       throw new Error("No config files found");
     }
 
     const { config } =
-      filterFiles.length > 1
+      filterConfigFiles.length > 1
         ? await inquirer.prompt({
             type: "list",
             name: "config",
             message: "Choose a config file",
-            choices: filterFiles,
+            choices: filterConfigFiles,
           })
-        : { config: filterFiles[0] };
+        : { config: filterConfigFiles[0] };
 
     const { departments } = require(`../config/${config}`);
 

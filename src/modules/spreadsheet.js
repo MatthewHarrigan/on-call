@@ -49,7 +49,7 @@ async function writeTimesheet(dir, processedCalendarEvents, team, department) {
     const file = `./${dir}/On call Timesheet V3 ${department} ${team} ${title}.xlsx`;
     await newWorkbook.xlsx.writeFile(file);
 
-    console.log(`${file}`)
+    console.log(`${file}`);
   }
 }
 
