@@ -35,41 +35,7 @@ inquirer.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
 const lastMonth = new Date();
 lastMonth.setMonth(lastMonth.getMonth() - 1);
 
-const dateRangeQuestions = [
-  {
-    type: "datetime",
-    name: "userStart",
-    message: "Start date",
-    initial: lastMonth,
-    format: ["d", "/", "m", "/", "yyyy"],
-  },
-  {
-    type: "datetime",
-    name: "userEnd",
-    message: "End date",
-    initial: new Date(),
-    format: ["d", "/", "m", "/", "yyyy"],
-  },
-];
-
-async function fetchCalendarEventsByDateRange(
-  { teamCalendarAPI, ...config },
-  start,
-  end
-) {
-  const urlWithUserEndDate = addDateRangeToCalendarUrl(
-    start,
-    end,
-    teamCalendarAPI
-  );
-
-  const response = await fetch(urlWithUserEndDate, requestOptions);
-  const { events } = await response.json();
-  return { config, events };
-}
-
 async function main() {
-  
   const { userStart, userEnd } = await inquirer.prompt(dateRangeQuestions);
 
   const fetchBankhols = await fetch(BANKHOLIDAYS_URL);
@@ -154,7 +120,38 @@ async function main() {
   }
 }
 
-module.exports = { main };
+const dateRangeQuestions = [
+  {
+    type: "datetime",
+    name: "userStart",
+    message: "Start date",
+    initial: lastMonth,
+    format: ["d", "/", "m", "/", "yyyy"],
+  },
+  {
+    type: "datetime",
+    name: "userEnd",
+    message: "End date",
+    initial: new Date(),
+    format: ["d", "/", "m", "/", "yyyy"],
+  },
+];
+
+async function fetchCalendarEventsByDateRange(
+  { teamCalendarAPI, ...config },
+  start,
+  end
+) {
+  const urlWithUserEndDate = addDateRangeToCalendarUrl(
+    start,
+    end,
+    teamCalendarAPI
+  );
+
+  const response = await fetch(urlWithUserEndDate, requestOptions);
+  const { events } = await response.json();
+  return { config, events };
+}
 
 function writeFiles(processedResults) {
   for (const {
@@ -180,3 +177,5 @@ function clearExistingTimesheets(dir) {
     }
   });
 }
+
+module.exports = { main };
