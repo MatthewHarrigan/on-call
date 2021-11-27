@@ -182,22 +182,21 @@ function clearExistingTimesheets(dir) {
   });
 }
 
-function promptClearDir(processedResults) {
-  const { response } = inquirer
-    .prompt([
-      {
-        type: "list",
-        name: "response",
-        message: "Clear files?",
-        choices: ["yes", "no"],
-      },
-    ])
+async function promptClearDir(processedResults) {
+  const { response } = await inquirer.prompt([
+    {
+      type: "list",
+      name: "response",
+      message: "Clear files?",
+      choices: ["yes", "no"],
+    },
+  ]);
 
-    if (response === "yes") {
-      clearExistingTimesheets(TIMESHEETS_DIR);
-    }
+  if (response === "yes") {
+    clearExistingTimesheets(TIMESHEETS_DIR);
+  }
 
-    writeFiles(processedResults);
+  writeFiles(processedResults);
 }
 
 module.exports = { main };
