@@ -43,75 +43,73 @@ async function main() {
     const files = await readdir("src/config/");
     const filterFiles = files.filter((item) => item !== "config.example.json");
     console.log(filterFiles);
+
+    const { userStart, userEnd } = await inquirer.prompt(dateRangeQuestions);
+
+    const fetchBankhols = await fetch(BANKHOLIDAYS_URL);
+    const bankHolidays = await fetchBankhols.json();
+
+    const processedResults = [];
+
+    for (const { department, teams } of departments) {
+      const calendarEventResults = await Promise.all(
+        teams.map((team) =>
+          fetchCalendarEventsByDateRange(team, userStart, userEnd)
+        )
+      );
+
+      for (result of calendarEventResults) {
+        const {
+          config: { costCentre, staff: userStaffConfig, team },
+          events: calendarEvents,
+        } = result;
+
+        const processedCalendarEvents = processCalendarEvents({
+          bankHolidays,
+          calendarEvents,
+          costCentre,
+          defaultsubmissionCutOff: DEFAULT_TIMESHEET_SUBMISSION_CUTOFF,
+          userStaffConfig,
+          team,
+        });
+
+        processedResults.push({ department, team, processedCalendarEvents });
+
+        console.log("\n<copy-paste this into Excel>\n");
+
+        const print = printCSV(processedCalendarEvents, costCentre);
+        console.log(print, "\n");
+
+        console.log("Total rotations\n");
+        const sorted = totalRotations(calendarEvents);
+        console.log(sorted, "\n");
+
+        // const summary = summariseRotationsByTimesheet(processedCalendarEvents);
+        // console.log("Timesheets summary", "\n\n", summary, "\n");
+
+        console.table(printSummaryTable(processedCalendarEvents));
+      }
+    }
+
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "response",
+          message: "Save timesheets?",
+          choices: ["no", "yes"],
+        },
+      ])
+      .then((answers) => {
+        if (answers.response === "yes") {
+          promptClearDir(processedResults);
+        } else {
+          console.log("bye!");
+        }
+      });
   } catch (err) {
     console.error(err);
   }
-
-  const { userStart, userEnd } = await inquirer.prompt(dateRangeQuestions);
-
-  const fetchBankhols = await fetch(BANKHOLIDAYS_URL);
-  const bankHolidays = await fetchBankhols.json();
-
-  const processedResults = [];
-
-  for (const { department, teams } of departments) {
-    const calendarEventResults = await Promise.all(
-      teams.map((team) =>
-        fetchCalendarEventsByDateRange(team, userStart, userEnd)
-      )
-    );
-
-    for (result of calendarEventResults) {
-      const {
-        config: { costCentre, staff: userStaffConfig, team },
-        events: calendarEvents,
-      } = result;
-
-      const processedCalendarEvents = processCalendarEvents({
-        bankHolidays,
-        calendarEvents,
-        costCentre,
-        defaultsubmissionCutOff: DEFAULT_TIMESHEET_SUBMISSION_CUTOFF,
-        userStaffConfig,
-        team,
-      });
-
-      processedResults.push({ department, team, processedCalendarEvents });
-
-      console.log("\n<copy-paste this into Excel>\n");
-
-      const print = printCSV(processedCalendarEvents, costCentre);
-      console.log(print, "\n");
-
-      console.log("Total rotations\n");
-      const sorted = totalRotations(calendarEvents);
-      console.log(sorted, "\n");
-
-      // const summary = summariseRotationsByTimesheet(processedCalendarEvents);
-      // console.log("Timesheets summary", "\n\n", summary, "\n");
-
-      console.table(printSummaryTable(processedCalendarEvents));
-    }
-  }
-
-  inquirer
-    .prompt([
-      {
-        type: "list",
-        name: "response",
-        message: "Save timesheets?",
-        choices: ["no", "yes"],
-      },
-    ])
-    .then((answers) => {
-      if (answers.response === "yes") {
-        promptClearDir(processedResults);
-      } else {
-        console.log("bye!");
-      }
-    });
-
-
 }
 
 const dateRangeQuestions = [
