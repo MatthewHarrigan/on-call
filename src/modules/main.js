@@ -23,7 +23,6 @@ const {
   summariseRotationsByTimesheet,
   printSummaryTable,
   totalRotations,
-  clearExistingTimesheets,
 } = require("./utils");
 
 const { processCalendarEvents } = require("./processCalendarEvents");
@@ -149,9 +148,34 @@ async function main() {
           clearExistingTimesheets(TIMESHEETS_DIR);
         }
 
-        writeTimesheet(processedResults);
+        writeFiles(processedResults);
       });
   }
 }
 
 module.exports = { main };
+
+function writeFiles(processedResults) {
+  for (const {
+    department,
+    team,
+    processedCalendarEvents,
+  } of processedResults) {
+    writeTimesheet(TIMESHEETS_DIR, processedCalendarEvents, team, department);
+  }
+}
+
+function clearExistingTimesheets(dir) {
+  const fs = require("fs");
+  const path = require("path");
+
+  fs.readdir(dir, (err, files) => {
+    if (err) throw err;
+
+    for (const file of files) {
+      fs.unlink(path.join(dir, file), (err) => {
+        if (err) throw err;
+      });
+    }
+  });
+}
