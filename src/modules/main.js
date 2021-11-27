@@ -105,14 +105,14 @@ async function main() {
       const print = printCSV(processedCalendarEvents, costCentre);
       console.log(print, "\n");
 
-
       console.log("Total rotations\n");
       const sorted = totalRotations(calendarEvents);
       console.log(sorted, "\n");
 
       // const summary = summariseRotationsByTimesheet(processedCalendarEvents);
       // console.log("Timesheets summary", "\n\n", summary, "\n");
-      console.log(printSummaryTable(processedCalendarEvents));
+
+      console.table(printSummaryTable(processedCalendarEvents));
     }
   }
 

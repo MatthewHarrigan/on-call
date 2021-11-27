@@ -74,7 +74,7 @@ function printSummaryTable(processedCalendarEvents) {
     tidyTable.push(results[result]);
   }
 
-  console.table(tidyTable);
+  return tidyTable;
 }
 
 function totalRotations(processedCalendarEvents) {

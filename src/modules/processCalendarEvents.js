@@ -91,22 +91,6 @@ const processCalendarEvents = ({
         })
         .join("");
 
-
-      // const paymentMonth = addMonths(new Date(end), 1);
-      // const paymentMonthFormatted = format(paymentMonth, 'MMMM');
-
-      // const paymentMonth = new Date(nextMonth);
-      // // paymentMonth.setMonth(paymentMonth.getMonth() + 2, 0);
-      // // console.log(paymentMonth)
-      // // const paymentMonthFormatted = new Intl.DateTimeFormat("en-GB", {
-      // //   month: "long"
-      // // }).format(paymentMonth);
-
-      // const paymentMonthFormatted = paymentMonth.setMonth(paymentMonth.getMonth() + 1);
-
-
-
-
       const currentMonthFormatted = new Intl.DateTimeFormat("en-GB", {
         month: "short",
         year: "numeric",
@@ -131,12 +115,6 @@ const processCalendarEvents = ({
 
       // If start date is before submissionCutOff put in that month's timesheetTitle here
       // but if the period is mostly past submissionCutOff I'll sometimes discretionally bump to next month manually
-
-      // const timesheetTitle =
-      //   new Date(start) < submissionCutOff && new Date(end) < submissionCutOff
-      //     ? `${previousMonthFormatted} ${currentMonthFormatted}`
-      //     : `${currentMonthFormatted} ${nextMonthFormatted}`;
-
 
       let timesheetTitle;
       let paymentMonth;
