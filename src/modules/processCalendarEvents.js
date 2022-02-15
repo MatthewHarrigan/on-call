@@ -1,3 +1,5 @@
+const { addMonths, format } = require('date-fns')
+
 function eachDayOfInterval(s, e) {
   const end = new Date(e);
   let current = new Date(s);
@@ -23,11 +25,11 @@ function previousFriday(date) {
   const diff = day <= 5 ? 7 - 5 + day : day - 5;
 
   d.setDate(d.getDate() - diff);
-  d.setHours(0);
-  d.setMinutes(0);
-  d.setSeconds(0);
+  // d.setHours(0);
+  // d.setMinutes(0);
+  // d.setSeconds(0);
 
-  return d.getTime();
+  return new Date(d.getTime());
 }
 
 // This maps the days from the confluence calendar and calculates weekends etc
@@ -54,7 +56,6 @@ const processCalendarEvents = ({
 
       // TODO work out what the start and end dates actually are
       const eachDay = eachDayOfInterval(start, end);
-      
 
       const weekends = eachDay.filter(isWeekend).length;
       const weekdays = eachDay.length - weekends;
@@ -112,18 +113,25 @@ const processCalendarEvents = ({
         })
         .join("");
 
-      // If start date is before submissionCutOff put in that month's timesheet here
-      // but if the period is mostly past submissionCutOff I'll sometimes discretionally bump to next month manually
+      let timesheetTitle;
+      let paymentMonth;
 
-      const timesheetTitle =
-        new Date(start) < submissionCutOff && new Date(end) < submissionCutOff
-          ? `${previousMonthFormatted} ${currentMonthFormatted}`
-          : `${currentMonthFormatted} ${nextMonthFormatted}`;
+      if (new Date(start) < submissionCutOff && new Date(end) < submissionCutOff) {
+        timesheetTitle = `${previousMonthFormatted} ${currentMonthFormatted}`;
+        paymentMonth = addMonths(new Date(submissionCutOff), 1);
+      } else {
+        timesheetTitle = `${currentMonthFormatted} ${nextMonthFormatted}`;
+        paymentMonth = addMonths(nextMonth, 1);
+      }
+
+      const paymentMonthFormatted = format(paymentMonth, 'MMMM-yyyy');
 
       return {
         start,
         end,
-        timesheet: timesheetTitle,
+        timesheetTitle,
+        paymentMonth: paymentMonthFormatted,
+        submissionCutOff,
         staffNumber,
         name: formatName,
         cost: costCentre,

@@ -1,13 +1,15 @@
 const Excel = require("exceljs");
+const path = require("path");
+const { readdir, unlink } = require("fs/promises");
 
 async function writeTimesheet(dir, processedCalendarEvents, team, department) {
-  // group events by timesheet e.g. oct-nov
+  // group events by timesheetTitle e.g. oct-nov
   const eventsByTimesheet = processedCalendarEvents.reduce(
-    (obj, { timesheet, ...event }) => {
-      if (!obj[timesheet]) {
-        obj[timesheet] = [event];
+    (obj, { timesheetTitle, ...event }) => {
+      if (!obj[timesheetTitle]) {
+        obj[timesheetTitle] = [event];
       } else {
-        obj[timesheet].push(event);
+        obj[timesheetTitle].push(event);
       }
       return obj;
     },
@@ -47,8 +49,18 @@ async function writeTimesheet(dir, processedCalendarEvents, team, department) {
     const file = `./${dir}/On call Timesheet V3 ${department} ${team} ${title}.xlsx`;
     await newWorkbook.xlsx.writeFile(file);
 
-    console.log(`${file}`)
+    console.log(`${file}`);
   }
 }
 
-module.exports = { writeTimesheet };
+async function clearExistingTimesheets(dir) {
+  const files = await readdir(dir);
+
+  for (const file of files) {
+    await unlink(path.join(dir, file), (err) => {
+      if (err) throw err;
+    });
+  }
+}
+
+module.exports = { clearExistingTimesheets, writeTimesheet };
