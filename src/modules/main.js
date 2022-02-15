@@ -86,14 +86,12 @@ async function main() {
           fetchCalendarEventsByDateRange(team, userStart, userEnd)
         )
       );
-
       for (result of calendarEventResults) {
         const {
           config: { costCentre, staff: userStaffConfig, team },
           events: calendarEvents,
         } = result;
-
-        const processedCalendarEvents = processCalendarEvents({
+      const processedCalendarEvents = processCalendarEvents({
           bankHolidays,
           calendarEvents,
           costCentre,
@@ -152,6 +150,7 @@ async function fetchCalendarEventsByDateRange(
 
   const response = await fetch(urlWithUserEndDate, requestOptions);
   const { events } = await response.json();
+  console.log('EVENTS', urlWithUserEndDate, events)
   return { config, events };
 }
 

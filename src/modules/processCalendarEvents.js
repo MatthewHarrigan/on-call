@@ -113,9 +113,6 @@ const processCalendarEvents = ({
         })
         .join("");
 
-      // If start date is before submissionCutOff put in that month's timesheetTitle here
-      // but if the period is mostly past submissionCutOff I'll sometimes discretionally bump to next month manually
-
       let timesheetTitle;
       let paymentMonth;
 
