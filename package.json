@@ -12,9 +12,8 @@
     "date-fns": "^2.26.0",
     "exceljs": "^4.3.0",
     "inquirer": "^8.2.0",
-    "inquirer-datepicker-prompt": "^0.4.2",
-    "node-fetch": "^2.6.1",
-    "yarn": "^1.22.17"
+    "inquirer-datepicker-prompt": "^0.4.0",
+    "node-fetch": "^2.6.1"
   },
   "repository": "git@github.com:bbc/on-call.git",
   "devDependencies": {
