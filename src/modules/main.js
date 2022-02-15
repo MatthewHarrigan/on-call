@@ -150,7 +150,9 @@ async function fetchCalendarEventsByDateRange(
 
   const response = await fetch(urlWithUserEndDate, requestOptions);
   const { events } = await response.json();
-  console.log('EVENTS', urlWithUserEndDate, events)
+  if (!events) {
+    throw new Error(`No events: Possible problem with calendar ${urlWithUserEndDate}`)
+  }
   return { config, events };
 }
 
